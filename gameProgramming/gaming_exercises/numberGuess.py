@@ -50,6 +50,7 @@ secretNumber = random.randint(1, 20)
 
 print(input("Please Input Your Name.\n\n"))
 Difficulty = print(input("Choose Your Difficulty\n"))
+# YOU ASK THE PLAYER TO CHOOSE DIFFICULTY, BUT PROVIDED NO INSTRUCTIONS! 
 # Game Loop
 
 
@@ -114,9 +115,12 @@ while playerScore != 3 or cpuScore != 3: # Start of Match (Game)
         cpuScore += 1
         print("The CPU wins a point since you ran out of guesses")
         break
-        
+    # The following code should be outside the scope of the while loop. 
+    # Causes game to exit early, not once a player/CPU scores 3 points. 
     if playerScore >= 3:
         print("Winner, Winner, Chicken Dinner! You scored 3 points first! You earned my Love!\n")
     else:
         if cpuScore >= 3:
             print("Yo, you lost to a computer. You are a scrub\n")
+
+# Your string outputs are not matching the difficulty settings, see screenshot in this folder. 

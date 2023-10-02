@@ -20,7 +20,7 @@ secretNumber = -1
 playerGuess = -1
 playerScore = 0
 cpuScore = 0
-numGuesses = 0
+numGuesses = -1
 playerName = ""
 difficulty = ""
 rangeMin = -1
@@ -124,6 +124,7 @@ while playerScore != 3 or cpuScore != 3: # Start of Match (Game)
                 print("Your guess was a bit to high btw!\n")
             else:
                 print("Your guess was a bit to low, Sorry!")
+        print(f"You have {numAttempts - numGuesses} gusses remaining.\n")
         numGuesses += 1
     if playerGuess != secretNumber:
         cpuScore += 1
@@ -133,10 +134,10 @@ while playerScore != 3 or cpuScore != 3: # Start of Match (Game)
         # Causes game to exit early, not once a player/CPU scores 3 points. 
 
 
-    if playerScore >= 3:
-        print("Winner, Winner, Chicken Dinner! You scored 3 points first! You earned my Love!\n")
-    else:
-        if cpuScore >= 3:
-            print("Yo, you lost to a computer. You are a scrub\n")
+if playerScore >= 3:
+    print("Winner, Winner, Chicken Dinner! You scored 3 points first! You earned my Love!\n")
+else:
+    if cpuScore >= 3:
+        print("Yo, you lost to a computer. You are a scrub\n")
 
     # Your string outputs are not matching the difficulty settings, see screenshot in this folder. 

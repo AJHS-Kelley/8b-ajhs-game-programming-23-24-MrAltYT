@@ -1,6 +1,6 @@
-# Collections 02 Johnson Traevon v0.2 
+# Collections 02 Johnson Traevon v0.3
 
-
+""" 
 playerInventory = []
 
 while len(playerInventory) < 10: 
@@ -14,4 +14,19 @@ while len(playerInventory) > 5:
     playerInventory.remove(item)
 playerInventory.sort()
 print(playerInventory) 
-    
+     """
+
+""" doorKeys = ["purple",
+        "aqua",
+        "ruby",
+        "emerald",
+        "gold",
+        "silver"
+]
+
+## print(f"{doorKeys}\n These are the keys you can choose from.\n")
+key = input("Which color key do you need to unlock the door?")
+if key in doorKeys:
+    print("You have the correct Key!\n")
+else:
+    print(f"You don't have any of these keys\n {doorKeys}.\n") """

@@ -1,5 +1,5 @@
-# 8B 03_functions Johnson Traevon, 10/23/2023 v0.1
-
+# 8B 03_functions Johnson Traevon, 10/23/2023 v0.2
+import random
 # Function -- A named piece of code that can be used easily.
 # Function signature -- Syntax for creating a new function.
 def exampleFunctionA(): # no parameters
@@ -18,5 +18,25 @@ def exampleFunctionB(num, count):
 
 # If a function requires parameters, your code will crash without them!
 # Returning a Function is known as calling a function
-exampleFunctionA()
-examplefunctionB(5, 0)
+# exampleFunctionA()
+# exampleFunctionB(5, 0)
+
+def rollDice(numDice, sizeDice):
+    numRolled = 0
+    sum = 0
+    while numRolled < numDice:
+        roll = random.randint(1, sizeDice)
+        print(f"Roll: {roll}\n")
+        print(f"Sum: {sum}\n")
+        numRolled += 1
+    return sum
+rollDice(3, 6)
+# rollDice(1, 20)
+
+strengthPlayer = rollDice(3, 6)
+dexterityPlayer = rollDice(3, 6)
+wisdomPlayer = rollDice(3, 6)
+
+print(strengthPlayer)
+print(dexterityPlayer)
+print(wisdomPlayer)

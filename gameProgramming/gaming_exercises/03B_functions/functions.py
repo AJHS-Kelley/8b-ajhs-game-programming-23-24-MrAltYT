@@ -1,4 +1,4 @@
-# 8B 03_functions Johnson Traevon, 10/23/2023 v0.2
+# 8B 03_functions Johnson Traevon, 10/25/2023 v0.3
 import random
 # Function -- A named piece of code that can be used easily.
 # Function signature -- Syntax for creating a new function.
@@ -26,17 +26,42 @@ def rollDice(numDice, sizeDice):
     sum = 0
     while numRolled < numDice:
         roll = random.randint(1, sizeDice)
+        sum += roll
         print(f"Roll: {roll}\n")
         print(f"Sum: {sum}\n")
         numRolled += 1
-    return sum
+    return sum # return will imediantely exit a loop, function, if/else block. 
 rollDice(3, 6)
 # rollDice(1, 20)
-
-strengthPlayer = rollDice(3, 6)
+constitutionPlayer = rollDice(3, 6)
 dexterityPlayer = rollDice(3, 6)
+intelligencePlayer = rollDice(3, 6)
 wisdomPlayer = rollDice(3, 6)
+charisma = rollDice(3, 6)
 
-print(strengthPlayer)
+
+print(constitutionPlayer)
 print(dexterityPlayer)
+print(intelligencePlayer)
 print(wisdomPlayer)
+print(charisma)
+
+
+
+def getStats():
+    playerStats =[0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0]
+    i = 0
+    while i < len(playerStats):
+    
+        playerStats[i] = rollDice(3, 6)
+        i += 1
+
+    print(playerStats)
+    
+getStats()

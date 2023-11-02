@@ -1,4 +1,4 @@
-# 04B--Hangman By Johnson Traevon 10/31/23 v0.4
+# 04B--Hangman By Johnson Traevon 10/31/23 v0.5
 import random
 
 words = 'aqua scp batman reconstruction rehabilitation celestial brilliant segregational continentaldrift blunder chess inaccuracy Pseudopseudohypoparathyroidism Pneumonoultramicroscopicsilicovolcanoconiosis honorificabilitudinitatibus chargoggagoggmanchauggagoggchaubunagungamaugg radiation '.split()
@@ -60,7 +60,15 @@ def displayBoard(missedLetters, correctLetters, secretWord):
     for eachLetter in missedLetters:
         print(eachLetter, end = ' ')
     print()
-    # Finished for 10/31/23
+    
+    blanks = '_' * len(secretWord)
 
+    # Replace Blanks with Correct Letters
+    for i in range(len(secretWord)):
+        if secretWord[i] in correctLetters:
+            blanks = blanks[:i] + secretWord[i] + blanks[i+1:]
 
+    for letter in blanks:
+        print(letter, end = ' ')
+    print()
 

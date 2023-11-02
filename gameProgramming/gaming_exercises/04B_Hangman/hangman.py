@@ -1,4 +1,4 @@
-# 04B--Hangman By Johnson Traevon 10/31/23 v0.5
+# 04B--Hangman By Johnson Traevon 10/31/23 v0.6
 import random
 
 words = 'aqua scp batman reconstruction rehabilitation celestial brilliant segregational continentaldrift blunder chess inaccuracy Pseudopseudohypoparathyroidism Pneumonoultramicroscopicsilicovolcanoconiosis honorificabilitudinitatibus chargoggagoggmanchauggagoggchaubunagungamaugg radiation '.split()
@@ -71,4 +71,21 @@ def displayBoard(missedLetters, correctLetters, secretWord):
     for letter in blanks:
         print(letter, end = ' ')
     print()
+
+
+def getGuess(alreadyGuessed): 
+    while True:
+        print('Please guess a letter and press enter')
+        guess = input()
+        guess = guess.lower()
+        if len(guess) != 1:
+            print('You Guessed to many letters, Please enter a single letter')
+        elif guess in alreadyGuessed:
+            print('Letter has been guessed already, try again brotha')
+        elif guess not in 'qwertyuiopasdfghjklzxcvbnm':
+            print('Please guess a LETTER from the English alphabet (Sorry! I wanted to do a japanese ver)')
+        else:
+            return guess
+
+        
 

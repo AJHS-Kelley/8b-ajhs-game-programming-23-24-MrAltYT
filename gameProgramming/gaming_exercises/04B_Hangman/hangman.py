@@ -1,4 +1,4 @@
-# 04B--Hangman By Johnson Traevon 10/31/23 v0.7
+# 04B--Hangman By Johnson Traevon 10/31/23 v0.8
 import random
 
 words = 'aqua scp batman reconstruction rehabilitation celestial brilliant segregational continentaldrift blunder chess inaccuracy Pseudopseudohypoparathyroidism Pneumonoultramicroscopicsilicovolcanoconiosis honorificabilitudinitatibus chargoggagoggmanchauggagoggchaubunagungamaugg radiation '.split()
@@ -90,6 +90,23 @@ def getGuess(alreadyGuessed):
 def playAgain():
     print('Wanna play again? ( ͡° ͜ʖ ͡°)')
     return input().lower().startswith('y')
+
+# Introduce the Game
+print('Hello!, Welcome to Hangman!')
+missedLetters = ''
+correctLetters = ''
+secretWord = getRandomWord(words)
+gameIsDone = False
+
+# Main Game Loop
+while True:
+    displayBoard(missedLetters, correctLetters, secretWord)
+
+
+    guess = getGuess(missedLetters + correctLetters)
+    if guess in secretWord:
+        correctLetters = correctLetters + guess
+
 
 
 

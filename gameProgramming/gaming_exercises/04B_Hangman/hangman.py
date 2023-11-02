@@ -1,4 +1,4 @@
-# 04B--Hangman By Johnson Traevon 10/31/23 v0.6
+# 04B--Hangman By Johnson Traevon 10/31/23 v0.7
 import random
 
 words = 'aqua scp batman reconstruction rehabilitation celestial brilliant segregational continentaldrift blunder chess inaccuracy Pseudopseudohypoparathyroidism Pneumonoultramicroscopicsilicovolcanoconiosis honorificabilitudinitatibus chargoggagoggmanchauggagoggchaubunagungamaugg radiation '.split()
@@ -86,6 +86,17 @@ def getGuess(alreadyGuessed):
             print('Please guess a LETTER from the English alphabet (Sorry! I wanted to do a japanese ver)')
         else:
             return guess
+        
+def playAgain():
+    print('Wanna play again? ( ͡° ͜ʖ ͡°)')
+    return input().lower().startswith('y')
+
+
+
+
+
+
+
 
         
 

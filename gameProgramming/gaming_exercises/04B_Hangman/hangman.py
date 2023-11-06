@@ -1,4 +1,4 @@
-# 04B--Hangman By Johnson Traevon 10/31/23 v1.0
+# 04B--Hangman By Johnson Traevon 10/31/23 v1.1
 import random
 
 words = 'aqua scp batman reconstruction rehabilitation celestial brilliant segregational continentaldrift blunder chess inaccuracy Pseudopseudohypoparathyroidism Pneumonoultramicroscopicsilicovolcanoconiosis honorificabilitudinitatibus chargoggagoggmanchauggagoggchaubunagungamaugg radiation '.split()
@@ -113,17 +113,17 @@ while True:
             if secretWord[i] not in correctLetters:
                 foundAllLetters = False
                 break
-            if foundAllLetters:   # If True: 
-                print('W! You found the word Amazing!(✿ ♡‿♡)')
-                print('The secret word was' + secretWord)
-                gameIsDone = True
+        if foundAllLetters:   # If True: 
+            print('W! You found the word Amazing!(✿ ♡‿♡)')
+            print('The secret word was ' + secretWord)
+            gameIsDone = True
     else:
         missedLetters = missedLetters + guess
 
         if len(missedLetters) == len(HANGMAN_BOARD)- 1:
             displayBoard(missedLetters, correctLetters, secretWord)
             print('You Lost, Im Disappointed in you')
-            print('Your Ip adress is [Random.int] and the cops have been called')
+            print('Your Ip adress has been leaked and the cops have been called')
             print('You made this number of correct letters ' + str(len(correctLetters)))
             print('The secret word was ' + secretWord)
             gameIsDone = True

@@ -1,6 +1,5 @@
-# 04B--Hangman By Johnson Traevon 10/31/23 v1.4
+# 04B--Hangman By Johnson Traevon 10/31/23 v1.7
 import random
-
 # words = 'aqua scp batman reconstruction rehabilitation celestial brilliant segregational continentaldrift blunder chess inaccuracy Pseudopseudohypoparathyroidism Pneumonoultramicroscopicsilicovolcanoconiosis honorificabilitudinitatibus chargoggagoggmanchauggagoggchaubunagungamaugg radiation  '.split()
 # Dictionary version
 # Stores in Key:Value Pairs
@@ -8,8 +7,8 @@ import random
 # Uses {} to specify a dictionary
 words = {'Colors': 'red black cyan purple orange blue green silver pink white'.split(),
          'Animals': 'dog cat fish lion monkey gorilla butterfly mouse bear cheetah'.split(),
-         'Shapes' : 'Triangle circle sphere cube tesseract orthoplex  hexeract star diamond rhombus'.split(),
-         'Foods': ''}
+         'Shapes' : 'triangle circle sphere cube tesseract orthoplex hexeract star diamond rhombus'.split(),
+         'Foods':  'pasta sushi pizza cinnamonroll cookie biscut bento noodles chicken schlong'.split()}
 
 
 
@@ -76,10 +75,10 @@ HANGMAN_BOARD = ['''
 
 
 # Pick Word From List
-def getRandomWord(wordList):
-    wordIndex = random.randint(0, len(wordList) - 1)
-    # len(listName) -1 is Extremely common for working with lists
-    return wordList[wordIndex]
+# def getRandomWord(wordList):  
+#     wordIndex = random.randint(0, len(wordList) - 1)
+#     # len(listName) -1 is Extremely common for working with lists
+#     return wordList[wordIndex]
 
 # Pick Word From Dictionary
 def getRandomWord(wordDict):
@@ -158,11 +157,12 @@ if difficulty == 'I':
          
 missedLetters = ''
 correctLetters = ''
-secretWord = getRandomWord(words)
+secretWord, secretSet = getRandomWord(words)
 gameIsDone = False
 
 # Main Game Loop
 while True:
+    print('The Secret word is from the ' + secretSet + ' category.\n')
     displayBoard(missedLetters, correctLetters, secretWord)
 
 
@@ -196,9 +196,10 @@ while True:
             missedLetters = ''
             correctLetters = ''
             gameIsDone = False
-            secretWord = getRandomWord(words)
+            secretWord, secretSet = getRandomWord(words)
         else:
             break
+
 
 
 

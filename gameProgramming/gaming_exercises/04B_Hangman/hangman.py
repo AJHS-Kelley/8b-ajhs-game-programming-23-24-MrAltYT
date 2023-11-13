@@ -5,7 +5,7 @@ import random
 # Stores in Key:Value Pairs
 # Actual Dictionary word (Key) : Value (Definition)
 # Uses {} to specify a dictionary
-words = {'Colors': 'red black cyan purple orange blue green silver pink white'.split(),
+words = {'Colors': 'red black cyan purple orange blue green silver pink white chargoggagoggmanchauggagoggchaubunagungamaugg'.split(),
          'Animals': 'dog cat fish lion monkey gorilla butterfly mouse bear cheetah'.split(),
          'Shapes' : 'triangle circle sphere cube tesseract orthoplex hexeract star diamond rhombus'.split(),
          'Foods':  'pasta sushi pizza cinnamonroll cookie biscut bento noodles chicken schlong'.split()}

@@ -1,10 +1,15 @@
-# 05A--PlatformerGameFunctions By Johnson Traevon 11/13/23 v0.2
+# 05A--PlatformerGameFunctions By Johnson Traevon 11/13/23 v0.3
 import random
 
 
 
  
 characters = ['goku', 'saitama', 'anya', 'aihoshino', 'kanada']
+mapPlace = ['t.o.p', 'monster assocication', 'forger residence', 'idol stage', 'canada']
+
+
+
+
 
 
 
@@ -16,24 +21,40 @@ characterChoice = input("Choose Your Character\n").lower()
 
 
 if characterChoice in characters:
-    if characterChoice == 'Goku' or characterChoice == "goku":
+    if characterChoice == "goku":
         print("You have chosen Goku!\n")
 
-    elif characterChoice == "Saitama" or characterChoice == "saitama":
+    elif characterChoice == "saitama":
         print("You have chosen Saitama!\n")
 
-    elif characterChoice == "Anya" or characterChoice == "anya":
+    elif characterChoice == "anya":
         print("You have chosen Anya!\n")
 
-    elif characterChoice == "AiHoshino" or characterChoice == "aihoshino":
+    elif characterChoice == "aihoshino":
         print("You have chosen Ai Hoshino!\n")
 
-    elif characterChoice == "Kanada" or characterChoice == "kanada":
+    elif characterChoice == "kanada":
         print("You have chosen Kanada!\n")
-
 else: print(f"Please choose a character from {characters}")
 
-mapChoice = input("Choose your map\n")
+mapChoice = input("Choose your map\n").lower()
+
+if mapChoice in mapPlace:
+    if mapChoice == "t.o.p":
+        print("You have chosen T.O.P!\n")
+
+    elif mapChoice == "monster assocication":
+        print("You have chosen Monster Assocication!\n")
+
+    elif mapChoice == "forger residence":
+        print("You have chosen Forger Residence!\n")
+
+    elif mapChoice == "idolstage":
+        print("You have chosen Idol Stage!\n")
+
+    elif mapChoice == "canada":
+        print("You have chosen canada!\n")
+else: print(f"Please choose a map.\n")
 
 
 

@@ -1,4 +1,4 @@
-# 05A--PlatformerGameFunctions By Johnson Traevon 11/13/23 v0.3
+# 05A--PlatformerGameFunctions By Johnson Traevon 11/13/23 v0.4
 import random
 
 
@@ -6,10 +6,11 @@ import random
  
 characters = ['goku', 'saitama', 'anya', 'aihoshino', 'kanada']
 mapPlace = ['t.o.p', 'monster assocication', 'forger residence', 'idol stage', 'canada']
-
-
-
-
+defaultHp = 3
+mapsize = 0
+small = 1
+medium = 3
+huge = 5
 
 
 
@@ -19,23 +20,26 @@ print(f"Here are the character choices so far: {characters}")
 
 characterChoice = input("Choose Your Character\n").lower()
 
+def character(characterChoice):
+    if characterChoice in characters:
+        if characterChoice == "goku":
+            print("You have chosen Goku!\n")
 
-if characterChoice in characters:
-    if characterChoice == "goku":
-        print("You have chosen Goku!\n")
+        elif characterChoice == "saitama":
+            print("You have chosen Saitama!\n")
 
-    elif characterChoice == "saitama":
-        print("You have chosen Saitama!\n")
+        elif characterChoice == "anya":
+            print("You have chosen Anya!\n")
 
-    elif characterChoice == "anya":
-        print("You have chosen Anya!\n")
+        elif characterChoice == "aihoshino":
+            print("You have chosen Ai Hoshino!\n")
 
-    elif characterChoice == "aihoshino":
-        print("You have chosen Ai Hoshino!\n")
+        elif characterChoice == "kanada":
+            print("You have chosen Kanada!\n")
+    else: print(f"Please choose a character from {characters}")
+    return characterChoice
 
-    elif characterChoice == "kanada":
-        print("You have chosen Kanada!\n")
-else: print(f"Please choose a character from {characters}")
+print(f"Here are the Map choices so far: {mapPlace}\n")
 
 mapChoice = input("Choose your map\n").lower()
 
@@ -58,7 +62,19 @@ else: print(f"Please choose a map.\n")
 
 
 
-
+def defaultStats(mpSize, mapChoice):
+    if mapChoice == mapPlace[2]:
+        mpSize = small
+    elif mapChoice == mapPlace[3]:
+        mpSize = small
+    elif mapChoice == mapPlace[0]:
+        mpSize = huge
+    elif mapChoice == mapPlace[1]:
+        mpSize = huge
+    else: mapChoice = medium
+    return mpSize
+mapSize = defaultStats(0, mapChoice)
+print(mapSize)
 
 
 

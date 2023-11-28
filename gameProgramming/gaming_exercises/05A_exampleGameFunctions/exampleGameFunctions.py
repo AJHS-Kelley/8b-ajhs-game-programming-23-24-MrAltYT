@@ -36,14 +36,16 @@ def character(characterChoice):
 
         elif characterChoice == "kanada":
             print("You have chosen Kanada!\n")
-    else: print(f"Please choose a character from {characters}")
+    else: 
+        print(f"Please choose a character from {characters}")
     return characterChoice
 
 print(f"Here are the Map choices so far: {mapPlace}\n")
 
 mapChoice = input("Choose your map\n").lower()
 
-if mapChoice in mapPlace:
+
+while mapChoice in mapPlace:
     if mapChoice == "t.o.p":
         print("You have chosen T.O.P!\n")
 
@@ -58,11 +60,13 @@ if mapChoice in mapPlace:
 
     elif mapChoice == "canada":
         print("You have chosen canada!\n")
-else: print(f"Please choose a map.\n")
+    else: 
+        print("Your map was not found.\n")
+    break
 
 
 
-def defaultStats(mpSize, mapChoice):
+def defaultMapStats(mpSize, mapChoice):
     if mapChoice == mapPlace[2]:
         mpSize = small
     elif mapChoice == mapPlace[3]:
@@ -73,8 +77,12 @@ def defaultStats(mpSize, mapChoice):
         mpSize = huge
     else: mapChoice = medium
     return mpSize
-mapSize = defaultStats(0, mapChoice)
-print(mapSize)
+mpSize = defaultMapStats(0, mapChoice)
+
+print(mpSize)
+def f():
+
+    pass
 
 
 

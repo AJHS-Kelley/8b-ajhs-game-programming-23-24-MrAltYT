@@ -80,7 +80,8 @@ def defaultMapStats(mpSize, mapChoice):
 mpSize = defaultMapStats(0, mapChoice)
 
 print(mpSize)
-def f():
+def defaultStats(baseStats =  "Default Value"):
+    
 
     pass
 

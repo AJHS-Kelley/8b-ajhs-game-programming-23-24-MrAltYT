@@ -1,6 +1,7 @@
 # 05A--PlatformerGameFunctions By Johnson Traevon 11/13/23 v0.4
 import random
 
+# Missing loops: for 
 
 
  
@@ -38,6 +39,7 @@ def character(characterChoice):
             print("You have chosen Kanada!\n")
     else: 
         print(f"Please choose a character from {characters}")
+        # Turn this into a loop and force the player to choose a character.  
     return characterChoice
 
 print(f"Here are the Map choices so far: {mapPlace}\n")

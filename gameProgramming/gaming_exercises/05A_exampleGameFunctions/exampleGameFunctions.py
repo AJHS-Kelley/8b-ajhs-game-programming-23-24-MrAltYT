@@ -1,4 +1,4 @@
-# 05A--PlatformerGameFunctions By Johnson Traevon 11/13/23 v0.4
+# 05A--PlatformerGameFunctions By Johnson Traevon 12/8/23 v1.1
 import random
 
 # Missing loops: for 
@@ -8,10 +8,11 @@ import random
 characters = ['goku', 'saitama', 'anya', 'aihoshino', 'kanada']
 mapPlace = ['t.o.p', 'monster assocication', 'forger residence', 'idol stage', 'canada']
 defaultHp = 3
-mapsize = 0
+mpsize = 3
 small = 1
 medium = 3
 huge = 5
+
 
 
 
@@ -58,25 +59,43 @@ elif mapChoice == mapPlace[0]:
     mpSize = huge
 elif mapChoice == mapPlace[1]:
     mpSize = huge
-else: mapChoice = medium
+else: mapSize = medium
 
 
 def defaultMapStats(mpSize):
 
     return mpSize
-mpSize = defaultMapStats(3)
+mpSize = defaultMapStats(medium)
+
+if mpSize == small:
+    hearts = 3
+    strength = 50
+    speed = 75
+    stamina = 300
+elif mpSize == medium:
+    hearts = 3
+    strength = 75
+    speed = 75
+    stamina = 450
+else:
+    hearts = 5
+    strength = 55
+    speed = 75
+    stamina = 600
+
+print(f"Your current number of hearts are {hearts}\n")
+print(f"Your strength is {strength}\n")
+print(f"Your current speed is {speed}\n")
+print(f"Your current stamina is {stamina}\n")
 
 
-def defaultStats(hearts, strength, speed, stamina):
-    if mpSize == small:
-        hearts = 3
-        strength = 50
-        speed = 75
-        stamina = 300
-    elif mpSize == medium:
-    
+
+def baseStats():
 
     pass
+  
+
+    
 
 
 

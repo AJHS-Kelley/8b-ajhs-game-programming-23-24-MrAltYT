@@ -7,6 +7,7 @@ import random
  
 characters = ['goku', 'saitama', 'anya', 'aihoshino', 'kanada']
 mapPlace = ['t.o.p', 'monster assocication', 'forger residence', 'idol stage', 'canada']
+items = ['Kamehameha', 'Fist of flowing water crushing rock', 'Supressed pistol', 'Star wand', 'Maplebranch']
 defaultHp = 3
 mpsize = 3
 small = 1
@@ -34,7 +35,7 @@ mapChoice = input("Choose your map\n").lower()
 
 while mapChoice not in mapPlace:
     print("I can't find your map...\n")
-    mapChoice = input("Choose your map")
+    mapChoice = input("Choose your map\n")
 
 while mapChoice in mapPlace:
     if mapChoice == "t.o.p":
@@ -51,48 +52,51 @@ while mapChoice in mapPlace:
         print("Your map was not found.\n")
     break
 
-if mapChoice == mapPlace[2]:
-    mpSize = small
-elif mapChoice == mapPlace[3]:
-    mpSize = small
-elif mapChoice == mapPlace[0]:
-    mpSize = huge
-elif mapChoice == mapPlace[1]:
-    mpSize = huge
-else: mapSize = medium
-
-
 def defaultMapStats(mpSize):
 
     return mpSize
 mpSize = defaultMapStats(medium)
+
+for mapChoice in mapPlace:
+    if mapChoice in mapPlace == 't.o.p':
+        mpSize = huge
+    elif mapChoice in mapPlace == 'monster assocication':
+        mpSize = defaultMapStats
+    elif mapChoice in mapPlace == 'forger residence':
+        mpSize = defaultMapStats
+    elif mapChoice in mapPlace == 'idol stage':
+        mpSize = small
+    elif mapChoice in mapPlace == 'canada':
+        mpSize = huge
+    else: mapChoice = "who knows?"
+
+
+
 
 if mpSize == small:
     hearts = 3
     strength = 50
     speed = 75
     stamina = 300
-elif mpSize == medium:
-    hearts = 3
-    strength = 75
-    speed = 75
-    stamina = 450
-else:
+elif mpSize == huge:
     hearts = 5
-    strength = 55
+    strength = 100
     speed = 75
     stamina = 600
+else:
+    hearts = 3
+    strength = 100
+    speed = 75
+    stamina = 450
+
 
 print(f"Your current number of hearts are {hearts}\n")
-print(f"Your strength is {strength}\n")
+print(f"Your current strength is {strength}\n")
 print(f"Your current speed is {speed}\n")
 print(f"Your current stamina is {stamina}\n")
 
 
 
-def baseStats():
-
-    pass
   
 
     

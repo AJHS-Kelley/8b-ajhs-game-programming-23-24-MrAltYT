@@ -95,6 +95,10 @@ print(f"Your current strength is {strength}\n")
 print(f"Your current speed is {speed}\n")
 print(f"Your current stamina is {stamina}\n")
 
+print("You have hit a item block!\n")
+
+def itemRoll(roll, block):
+    roll = random.randint(1, 6)
 
 
   

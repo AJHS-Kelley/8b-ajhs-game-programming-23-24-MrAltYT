@@ -27,7 +27,7 @@ while characterChoice not in characters:
     print("Invalid Character...\n")
     characterChoice = input("Choose Your Character\n").lower()
 
-    
+   
 
 print(f"Here are the Map choices so far: {mapPlace}\n")
 
@@ -97,13 +97,17 @@ print(f"Your current stamina is {stamina}\n")
 
 print("You have hit a item block!\n")
 
-def itemRoll(roll, block):
-    roll = random.randint(1, 6)
+ 
+    
 
 
   
+print("Traceback (most recent call last)\n")
+print("File Users-s20100391-Downloads-8b-ajhs-game-programming-23-24-MrAltYT-gameProgramming-gaming_exercises\05A_exampleGameFunctions-exampleGameFunctions.py, line 17, in <module>\n")
+print("NameError: name 'S' is not defined\n")
+print("PS C:-Users-s20100391-Downloads-8b-ajhs-game-programming-23-24-MrAltYT\n")
 
-    
+print("HA! trolled you!!\n")
 
 
 

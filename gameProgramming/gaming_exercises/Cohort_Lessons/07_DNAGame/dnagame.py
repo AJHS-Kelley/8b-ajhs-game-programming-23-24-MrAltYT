@@ -1,4 +1,4 @@
-# DNA Replication Game, Johnson Traevon v0.4
+# DNA Replication Game, Johnson Traevon v0.5
 
 # Import Entire Modules -- Get the whole tool box
 import time, datetime
@@ -74,6 +74,12 @@ def calcScore(rnaSequence: str, rnaTime: float) -> int:
     score *= scoreMulti
     return score
 
+def saveScore(dnaSequence: str, rnaSequence: str, rnaTime: float) -> None:
+    playerName = input("What is your first name?\n")
+    lastName = input("What is your last name?\n")
+    fullName = playerName + "  " + lastName
+
+    fileName = "dnaReplicationScore" + fullName + ".txt"
 dna = genDNA()
 rna = doTranscription(dna)
 print(verifySequence(dna, rna[0]))

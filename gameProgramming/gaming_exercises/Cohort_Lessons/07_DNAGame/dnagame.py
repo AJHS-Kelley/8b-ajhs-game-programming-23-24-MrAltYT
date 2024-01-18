@@ -1,4 +1,4 @@
-# DNA Replication Game, Johnson Traevon v0.5
+# DNA Replication Game, Johnson Traevon v0.6
 
 # Import Entire Modules -- Get the whole tool box
 import time, datetime
@@ -80,6 +80,13 @@ def saveScore(dnaSequence: str, rnaSequence: str, rnaTime: float) -> None:
     fullName = playerName + "  " + lastName
 
     fileName = "dnaReplicationScore" + fullName + ".txt"
+    saveData = open(fileName, "a")
+    # File Modes
+    # "x" mode -- Create file, if file exists, exit with error
+    # "w" mode -- create file, if file exists, overwrite it
+    # "a" mode -- create file, if file exists, append to it
+    saveData.write(f"DNA Sequence: {dnaSequence}\nRNA Sequence: {rnaSequence}\n")
+    saveData.write(f"Transcription Time: {rnaTime}\n")
 dna = genDNA()
 rna = doTranscription(dna)
 print(verifySequence(dna, rna[0]))

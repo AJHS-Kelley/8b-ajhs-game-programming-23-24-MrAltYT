@@ -1,4 +1,4 @@
-# DNA Replication Game, Johnson Traevon v0.6
+# DNA Replication Game, Johnson Traevon v0.8
 
 # Import Entire Modules -- Get the whole tool box
 import time, datetime
@@ -23,15 +23,21 @@ def genDNA() -> str:
         basesGenerated += 1
     return dnaSequence
 
-def doTranscription(dnaSequence: str) -> tuple:
+
+def doTranscription(dnaSequence: str, basesRequested: str) -> tuple:
     print(f"The DNA Sequence is {dnaSequence}.\n")
     print("You will now generate the RNA sequence that would match\n")
     print("Please remember, in the RNA sequence U pairs with A from the DNA sequence")
     rnaStart = time.time() # time.time() returns the number of seconds since 00:00:00 UTC Jan, 01, 1970
-    rnaSequence = input("Please enter the matching RNA sequence.  Leave no spaces! Then press enter.\n").upper()
     rnaStop = time.time()
     rnaTime = rnaStop - rnaStart
+    rnaSequence = input("Please enter the matching RNA sequence.  Leave no spaces! Then press enter.\n").upper().split()
+    while len(rnaSequence) > i:
+        if rnaSequence
+            if 
     return (rnaSequence, rnaTime)
+
+
 
     # Tuples are ORDERED -- you can reference itmes with the index
     # Tuples are UNCHANGEABLE -- you cannot add, modify, or delete after creating
@@ -92,7 +98,7 @@ def saveScore(dnaSequence: str, rnaSequence: str, rnaTime: float, score: float) 
     saveData.write(f"{datetime.datetime.now()}\n")
     saveData.close()
 dna = genDNA()
-rna = doTranscription(dna)
+rna = doTranscription(dna, i)
 if verifySequence(dna, rna[0]):
     score = (calcScore(rna[0], rna[1]))
     saveScore(dna, rna[0], rna[1], score)

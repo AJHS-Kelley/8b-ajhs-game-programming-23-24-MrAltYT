@@ -54,7 +54,7 @@ def verifySequence(dnaSequence: str, rnaSequence: str) -> bool:
             print("They do not match because no base is True.\n")
     return isMatch
 
-def calcScore(rnaSequence: str, rnaTime: float) -> int:
+def calcScore(rnaSequence: str, rnaTime: float) -> float:
     score = 0
     if rnaTime < 3.0:
         score += 1000000
@@ -93,7 +93,9 @@ def saveScore(dnaSequence: str, rnaSequence: str, rnaTime: float, score: float) 
     saveData.close()
 dna = genDNA()
 rna = doTranscription(dna)
-print(verifySequence(dna, rna[0]))
+if verifySequence(dna, rna[0]):
+    score = (calcScore(rna[0], rna[1]))
+    saveScore(dna, rna[0], rna[1], score)
 
 print(calcScore(rna[0], rna[1]))
 

@@ -32,9 +32,6 @@ def doTranscription(dnaSequence: str, basesRequested: str) -> tuple:
     rnaStop = time.time()
     rnaTime = rnaStop - rnaStart
     rnaSequence = input("Please enter the matching RNA sequence.  Leave no spaces! Then press enter.\n").upper().split()
-    while len(rnaSequence) > i:
-        if rnaSequence
-            if 
     return (rnaSequence, rnaTime)
 
 
@@ -98,7 +95,7 @@ def saveScore(dnaSequence: str, rnaSequence: str, rnaTime: float, score: float) 
     saveData.write(f"{datetime.datetime.now()}\n")
     saveData.close()
 dna = genDNA()
-rna = doTranscription(dna, i)
+rna = doTranscription(dna)
 if verifySequence(dna, rna[0]):
     score = (calcScore(rna[0], rna[1]))
     saveScore(dna, rna[0], rna[1], score)

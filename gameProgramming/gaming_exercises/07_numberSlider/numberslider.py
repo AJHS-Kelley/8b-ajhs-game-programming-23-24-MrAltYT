@@ -1,4 +1,4 @@
-# Sliding your numbers game, by Johnson Traevon, v0.1
+# Sliding your numbers game, by Johnson Traevon, v0.2
 
 import sys, random, pygame
 # sys module provides access to system resources such as operating system
@@ -29,4 +29,20 @@ BGCOLOR = DARKTURQUOISE
 TILECOLOR = GREEN
 TEXTCOLOR = WHITE
 BORDERCOLOR = BRIGHTBLUE
-BASICFONTSIZE = 20
+BASICFONTSIZE = 20 # Pixels
+
+# BUTTON SETUP
+BUTTONCOLOR = WHITE
+BUTTONTEXTCOLOR = BLACK
+MESSAGECOLOR = WHITE
+
+# ESTABLISH WINDOW MARGINS
+XMARGIN = int((WINDOWWIDTH - (TILESIZE * BOARDWIDTH + (BOARDWIDTH - 1))) / 2)
+YMARGIN = int((WINDOWHEIGHT - (TILESIZE * BOARDHEIGT + (BOARDHEIGT - 1))) / 2)
+
+# DIRECTIONS
+UP = 'up'
+DOWN = 'down'
+LEFT = 'left'
+RIGHT = 'right'
+

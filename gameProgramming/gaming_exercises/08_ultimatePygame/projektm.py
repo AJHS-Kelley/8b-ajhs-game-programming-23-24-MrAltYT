@@ -9,19 +9,20 @@ clock = pygame.time.Clock()
 test_surface = pygame.Surface((600,400))
 test_surface.fill('purple')
 
+# Draw all our elements
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
 
-    screen.blit(test_surface,(0,0))
-    # Draw all our elements
+    screen.blit(test_surface,(200,100))
+    
     # Update everything
     pygame.display.update()
     clock.tick(60)
 
-
+# STOPED AT 32:36-----
 
 
 

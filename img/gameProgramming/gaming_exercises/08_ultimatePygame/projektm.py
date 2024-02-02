@@ -1,4 +1,4 @@
-# Projekt M by Johnson Traevon 2.53pm 2/1/24 v0.2
+# Projekt M by Johnson Traevon 2.53pm 2/1/24 v0.2.5
 import pygame
 from sys import exit
 pygame.init()

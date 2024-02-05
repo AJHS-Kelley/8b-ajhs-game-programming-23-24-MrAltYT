@@ -1,4 +1,5 @@
 # DNA Replication Game, Johnson Traevon v0.8
+# Program crashes as soon as I enter a number of bases to generate. 
 
 # Import Entire Modules -- Get the whole tool box
 import time, datetime

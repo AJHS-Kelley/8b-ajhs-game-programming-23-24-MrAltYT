@@ -2,6 +2,8 @@
 import pygame
 from sys import exit
 
+# You are in danger of failing the project if you do not get caught up quickly. You will most likely need to work on this outside of class. 
+
 pygame.init()
 screen = pygame.display.set_mode((800,400))
 pygame.display.set_caption('A.R.G.U.S')

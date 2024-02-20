@@ -25,7 +25,7 @@ def genDNA() -> str:
     return dnaSequence
 
 
-def doTranscription(dnaSequence: str, basesRequested: str) -> tuple:
+def doTranscription(dnaSequence: str,) -> tuple:
     print(f"The DNA Sequence is {dnaSequence}.\n")
     print("You will now generate the RNA sequence that would match\n")
     print("Please remember, in the RNA sequence U pairs with A from the DNA sequence")

@@ -13,7 +13,7 @@ test_font = pygame.font.Font('img/Seagram_tfb 2.ttf', 33)
 sky_surface = pygame.image.load('img/blossom.jpg').convert_alpha()
 ground_surface = pygame.image.load('img/ground.jpg').convert_alpha()
 
-score_surf = test_font.render('Welcome to Oshi No Ko!!', True, 'cyan')
+score_surf = test_font.render('Welcome to Oshi No Ko!', True, 'Purple')
 score_rect = score_surf.get_rect(center = (400,50))
 
 Stars_surf = pygame.image.load('img/Star_Twins.gif').convert_alpha()
@@ -34,6 +34,9 @@ while True:
     screen.blit(sky_surface,(0,0))
     screen.blit(ground_surface,(0,225))
     screen.blit(score_surf,score_rect)
+    pygame.draw.rect(screen, '#da3c72',score_rect)
+    pygame.draw.rect(screen, '#4b2981',score_rect,10)
+
     Stars_rect.x -= 3
     if Stars_rect.right <= -300:
         Stars_rect.left = 800

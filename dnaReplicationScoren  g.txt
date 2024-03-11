@@ -1,6 +1,0 @@
-DNA Sequence: C
-RNA Sequence: ['G']
-Transcription Time: 0.0
-Score: 10000.0
-n  g
-2024-02-20 13:29:31.052340

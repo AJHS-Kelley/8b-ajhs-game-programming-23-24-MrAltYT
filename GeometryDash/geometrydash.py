@@ -1,4 +1,4 @@
-# 8B Geometry Dash Sponsored by RobTop, Created by Johnson Traveon v0.2
+# 8B Geometry Dash Sponsored by RobTop, Created by Johnson Traveon and Christain Ortiz v0.2
 import pygame
 from sys import exit
 import random

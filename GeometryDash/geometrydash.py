@@ -4,6 +4,8 @@ from sys import exit
 import random
 import gd
 
+
+
 pygame.init()
 screen = pygame.display.set_mode((1152,648))
 pygame.display.set_caption('Geometry Dash')
@@ -24,8 +26,8 @@ while True:
             pygame.quit()
             exit()
     screen.blit(geometry_bg,(0,0))
-    screen.blit(geometry_surface,(350,65))
-    screen.blit(geometry_pb, (445,200))
+    screen.blit(geometry_surface,(325,65))
+    screen.blit(geometry_pb, (480,260))
     pygame.draw.rect(geometry_surface,'Black',geometry_rect, 700)
     
     

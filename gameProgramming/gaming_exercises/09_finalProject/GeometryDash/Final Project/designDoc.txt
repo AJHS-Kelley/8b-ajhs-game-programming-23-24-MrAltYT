@@ -3,3 +3,13 @@ Theme: Bright, Brillaint / Dark Graphics -- Tropical Setting
 
 Win Condition(s): Reach the end of the Level
 Loss Condition(s): Die before reaching the end or restart the level
+
+Levels / Screens:
+    -- Zodiac
+    -- Tidal Wave
+
+Objectives /  Enemies / Obsticles: 
+ -- beat the level / monsters / spike / block
+ 
+ Items / Equipment / Objects
+    -- Stars, Orbs, Coins / N/A / 322,927 squares 

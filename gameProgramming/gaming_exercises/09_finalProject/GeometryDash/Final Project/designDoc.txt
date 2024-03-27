@@ -1,0 +1,5 @@
+Game Genre / Type: Geometry Dash
+Theme: Bright, Brillaint / Dark Graphics -- Tropical Setting
+
+Win Condition(s): Reach the end of the Level
+Loss Condition(s): Die before reaching the end or restart the level

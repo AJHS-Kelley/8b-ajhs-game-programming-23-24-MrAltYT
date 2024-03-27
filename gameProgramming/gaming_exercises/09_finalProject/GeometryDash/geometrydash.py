@@ -16,7 +16,9 @@ elif resolution == 0:
     y = 600
 else:
     print('This game only runs on Resolution 0 or 1.')
-    
+gameplay = 2
+if gameplay == 2:
+    pass
 pygame.init()
 # SENSAGREGORY INSTINCTUAL HOLOSCHLATERIAL
 
@@ -48,3 +50,14 @@ while True:
     
     pygame.display.update()
     clock.tick(60)
+    
+
+    
+    
+    
+    
+    
+def Zodiac():
+    pass
+def Deadlocked():
+    pass

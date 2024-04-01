@@ -1,4 +1,4 @@
-# 8B Geometry Dash Sponsored by RobTop, Created by Johnson Traveon and Christain Ortiz v0.5S
+# 8B Geometry Dash Sponsored by RobTop, Created by Johnson Traveon and Christain Ortiz v0.8
 import pygame
 from sys import exit
 import random
@@ -28,10 +28,13 @@ screen = pygame.display.set_mode((1152,648))
 pygame.display.set_caption('Geometry Dash')
 clock = pygame.time.Clock()
 
-geometry_bg = pygame.image.load('img/Gd background.jpg').convert_alpha()
 
+
+geometry_bg = pygame.image.load('img/Gd background.jpg').convert_alpha()
+cEdit = pygame.image.load('img/GD CEdit.jpg').convert_alpha()
 geometrydash_font = pygame.font.Font('img/Seagram.ttf', 80)
 geometry_surface = geometrydash_font.render('geometry dash', True, 'Green').convert_alpha()
+geometry_editor = pygame.image.load('img/editor button.jpg').convert_alpha()
 # geometry_rect = geometry_surface.get_rect(center = (400,150))
 
 geometry_pb = pygame.image.load('img/Gd play.jpg').convert_alpha()
@@ -42,9 +45,13 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
+            
+            
     screen.blit(geometry_bg,(0,0))
     screen.blit(geometry_surface,(325,65))
     screen.blit(geometry_pb, (480,260))
+    screen.blit(cEdit, (200, 260))
+    screen.blit(geometry_editor, (750, 260))
     # pygame.draw.rect(geometry_surface,'Black',geometry_rect, 700)
     
     

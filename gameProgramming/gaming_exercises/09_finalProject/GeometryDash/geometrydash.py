@@ -34,7 +34,7 @@ geometry_bg = pygame.image.load('img/Gd background.jpg').convert_alpha()
 cEdit = pygame.image.load('img/GD CEdit.jpg').convert_alpha()
 geometrydash_font = pygame.font.Font('img/Seagram.ttf', 80)
 geometry_surface = geometrydash_font.render('geometry dash', True, 'Green').convert_alpha()
-geometry_editor = pygame.image.load('img/editor button.jpg').convert_alpha()
+geometry_editor = pygame.image.load('img/editor button.png').convert_alpha()
 # geometry_rect = geometry_surface.get_rect(center = (400,150))
 
 geometry_pb = pygame.image.load('img/Gd play.jpg').convert_alpha()

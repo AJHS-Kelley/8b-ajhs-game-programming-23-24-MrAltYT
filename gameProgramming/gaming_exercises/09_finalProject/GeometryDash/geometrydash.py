@@ -38,7 +38,7 @@ geometry_editor = pygame.image.load('img/editor button.jpg').convert_alpha()
 # geometry_rect = geometry_surface.get_rect(center = (400,150))
 
 geometry_pb = pygame.image.load('img/Gd play.jpg').convert_alpha()
-gdpb_rect = geometry_pb.get_rect(center = (480,200))
+gdpb_rect = geometry_pb.get_rect(center = (520,260))
 
 while True:
     for event in pygame.event.get():
@@ -57,7 +57,12 @@ while True:
     mouse_pos = pygame.mouse.get_pos()
     if gdpb_rect.collidepoint((mouse_pos)):
         print(pygame.mouse.get_pressed())
-    
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        screen.blit(geometry_editor, (10000, 10000))
+        screen.blit(cEdit, (10000, 10000))
+        screen.blit(geometry_pb, (10000,10000))
+        screen.blit(geometry_surface,(10000,10000))
+        print('player is choosing a level')
     pygame.display.update()
     clock.tick(60)
     

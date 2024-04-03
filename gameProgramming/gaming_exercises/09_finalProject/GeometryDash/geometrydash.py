@@ -55,8 +55,8 @@ while True:
     # pygame.draw.rect(geometry_surface,'Black',geometry_rect, 700)
     
     mouse_pos = pygame.mouse.get_pos()
-    if gdpb_rect.collidepoint((mouse_pos)):
-        print(pygame.mouse.get_pressed())
+    # if gdpb_rect.collidepoint((mouse_pos)):
+    #     print(pygame.mouse.get_pressed())
     if event.type == pygame.MOUSEBUTTONDOWN:
         screen.blit(geometry_editor, (10000, 10000))
         screen.blit(cEdit, (10000, 10000))

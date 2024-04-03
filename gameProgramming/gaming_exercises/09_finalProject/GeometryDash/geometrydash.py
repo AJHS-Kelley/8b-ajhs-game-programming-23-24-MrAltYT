@@ -34,11 +34,11 @@ geometry_bg = pygame.image.load('img/Gd background.jpg').convert_alpha()
 cEdit = pygame.image.load('img/GD CEdit.jpg').convert_alpha()
 geometrydash_font = pygame.font.Font('img/Seagram.ttf', 80)
 geometry_surface = geometrydash_font.render('geometry dash', True, 'Green').convert_alpha()
-geometry_editor = pygame.image.load('img/editor button.png').convert_alpha()
+geometry_editor = pygame.image.load('img/editor button.jpg').convert_alpha()
 # geometry_rect = geometry_surface.get_rect(center = (400,150))
 
 geometry_pb = pygame.image.load('img/Gd play.jpg').convert_alpha()
-
+gdpb_rect = geometry_pb.get_rect(center = (480,200))
 
 while True:
     for event in pygame.event.get():
@@ -54,6 +54,9 @@ while True:
     screen.blit(geometry_editor, (750, 260))
     # pygame.draw.rect(geometry_surface,'Black',geometry_rect, 700)
     
+    mouse_pos = pygame.mouse.get_pos()
+    if gdpb_rect.collidepoint((mouse_pos)):
+        print(pygame.mouse.get_pressed())
     
     pygame.display.update()
     clock.tick(60)

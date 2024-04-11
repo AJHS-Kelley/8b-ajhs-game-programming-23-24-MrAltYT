@@ -1,4 +1,4 @@
-# 8B Geometry Dash Sponsored by RobTop, Created by Johnson Traveon and Christain Ortiz v0.8.2
+# 8B Geometry Dash Sponsored by RobTop, Created by Johnson Traveon and Christain Ortiz v0.8.4
 import pygame
 from sys import exit
 import random
@@ -23,6 +23,12 @@ if gameplay == 2:
 welcome = 'geometry dash'
 start = False
 zodiac_Dis = 'top 1 hardest demon from 2018 - 2023'
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+
 # BINTRICALIZATIONALISM
 
 def player_controls(event1, event2, keys):
@@ -31,7 +37,7 @@ def player_controls(event1, event2, keys):
     if keys[pygame.K_SPACE]:
         print('jump')
     event2 = keys
-    
+    return player_controls
 
 
 
@@ -40,7 +46,7 @@ def player_controls(event1, event2, keys):
 pygame.init()
 # SENSAGREGORY INSTINCTUAL HOLOSCHLATERIAL
 
-screen = pygame.display.set_mode((1152,648))
+screen = pygame.display.set_mode((x,y))
 
     
 pygame.display.set_caption('Geometry Dash')
@@ -50,14 +56,16 @@ clock = pygame.time.Clock()
 
 geometry_bg = pygame.image.load('img/Gd background.jpg').convert_alpha()
 cEdit = pygame.image.load('img/GD CEdit.jpg').convert_alpha()
-geometrydash_font = pygame.font.Font('img/Seagram.ttf', 80)
-geometry_surface = geometrydash_font.render('geometry dash', True, 'Green').convert_alpha()
-geometry_editor = pygame.image.load('img/editor button.jpg').convert_alpha()
+font = pygame.font.Font('img/Seagram.ttf', 80)
+tip = font.render("tip: tap and hold for the first few seconds of the level", True, BLUE)
+geometry_surface = font.render('geometry dash', True, 'Green').convert_alpha()
+geometry_editor = pygame.image.load('img/editor button.png').convert_alpha()
 
 # geometry_rect = geometry_surface.get_rect(center = (400,150))
 
 geometry_pb = pygame.image.load('img/Gd play.jpg').convert_alpha()
 gdpb_rect = geometry_pb.get_rect(center = (520,260))
+gd_editor_rect = geometry_editor.get_rect(center = (750, 260))
 
 def start_screen():
     """main menu. option to switch level, and controls guide, and game overview."""
@@ -69,7 +77,7 @@ def start_screen():
         if pygame.key.get_pressed()[pygame.K_2]:
             level = 1
 
-        welcome = geometrydash_font.render(f"Welcome to Pydash. choose level({level + 1}) by keypad", True, 'WHITE')
+        welcome = font.render(f"Welcome to Pydash. choose level({level + 1}) by keypad", True, 'WHITE')
 
         controls = player_controls.font.render("Controls: jump: Space/Up exit: Esc", True, 'GREEN')
 
@@ -77,7 +85,7 @@ def start_screen():
         screen.blit(controls, (100, 400))
         screen.blit(tip, (100, 500))
 
-        level_memo = zodiac_Dis.render(f"Level {level + 1}.", True, (255, 255, 0)).convert_alpha()
+        level_memo = font.render(f"Level {level + 1}.", True, (255, 255, 0)).convert_alpha()
         screen.blit(level_memo, (100, 200))
 
 
@@ -103,12 +111,13 @@ while True:
     #     print(pygame.mouse.get_pressed())
     # if event.type == pygame.MOUSEBUTTONDOWN:
     #     print('player is choosing a level')
+
     if event.type == pygame.MOUSEBUTTONDOWN:
         if gdpb_rect.collidepoint(event.pos):
             print('player touched the pb')
     if event.type == pygame.MOUSEBUTTONDOWN:
-        if g.collidepoint(event.pos):
-            print('player touched the pb')
+        if gd_editor_rect.collidepoint(event.pos):
+            print('Player Touched the editor button')
         # if mouse_pos.collidepoint(geometry_pb):
         #     print('Player mouse is on Play button')
         

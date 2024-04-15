@@ -1,4 +1,4 @@
-# 8B Geometry Dash Sponsored by RobTop, Created by Johnson Traveon and Christain Ortiz v0.8.4
+# 8B Geometry Dash Sponsored by RobTop, Created by Johnson Traveon and Christain Ortiz v0.8.4.5
 import pygame
 from sys import exit
 import random
@@ -6,7 +6,9 @@ from pygame.math import Vector2
 from pygame.draw import rect
 import csv
 import os
-
+screen1 = True
+screen2 = False
+screen3 = False
 
 resolution = 1
 if resolution == 1:
@@ -54,7 +56,7 @@ screen = pygame.display.set_mode((x,y))
 pygame.display.set_caption('Geometry Dash')
 clock = pygame.time.Clock()
 
-
+game_active = True
 
 geometry_bg = pygame.image.load('img/Gd background.jpg').convert_alpha()
 cEdit = pygame.image.load('img/GD CEdit.jpg').convert_alpha()
@@ -66,30 +68,11 @@ geometry_editor = pygame.image.load('img/editor button.png').convert_alpha()
 # geometry_rect = geometry_surface.get_rect(center = (400,150))
 
 geometry_pb = pygame.image.load('img/Gd play.jpg').convert_alpha()
-gdpb_rect = geometry_pb.get_rect(center = (520,260))
-gd_editor_rect = geometry_editor.get_rect(center = (750, 260))
-cedit_rect = cEdit.get_rect(center = (200,260))
+gdpb_rect = geometry_pb.get_rect(center = (550,300))
+gd_editor_rect = geometry_editor.get_rect(center = (775, 300))
+cedit_rect = cEdit.get_rect(center = (225,290))
 
-def start_screen():
-    """main menu. option to switch level, and controls guide, and game overview."""
-    global level
-    if not start:
-        screen.fill('BLACK')
-        if pygame.key.get_pressed()[pygame.K_1]:
-            level = 0
-        if pygame.key.get_pressed()[pygame.K_2]:
-            level = 1
 
-        welcome = font.render(f"Welcome to Pydash. choose level({level + 1}) by keypad", True, 'WHITE')
-
-        controls = player_controls.font.render("Controls: jump: Space/Up exit: Esc", True, 'GREEN')
-
-        screen.blit(welcome, (100, 100))
-        screen.blit(controls, (100, 400))
-        screen.blit(tip, (100, 500))
-
-        level_memo = font.render(f"Level {level + 1}.", True, (255, 255, 0)).convert_alpha()
-        screen.blit(level_memo, (100, 200))
 
 def __init__(self, image, platforms, pos, *groups):
     """
@@ -114,57 +97,44 @@ def __init__(self, image, platforms, pos, *groups):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
-        elif event.type == pygame.K_ESCAPE:
+        if event.type == pygame.K_ESCAPE:
             print(input('Are you sure you want to leave?'))
             if event.type == pygame.K_KP_ENTER:
                 pygame.quit()
                 exit()
             
+    if game_active:
+        
+        screen.blit(geometry_bg,(0,0))
+        screen.blit(geometry_surface,(325,65))
+        screen.blit(geometry_pb, (480,260))
+        screen.blit(cEdit, (200, 260))
+        screen.blit(geometry_editor, (750, 260))
+        # pygame.draw.rect(geometry_surface,'Black',geometry_rect, 700)
+        
+        mouse_pos = pygame.mouse.get_pos()
+
+
+        
+        """"Game Menu Controls"""
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if gdpb_rect.collidepoint(event.pos):
+                screen.fill((94,129,162))
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if gd_editor_rect.collidepoint(event.pos):
+                screen.fill((150,0,0))
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if cedit_rect.collidepoint(event.pos):
+                screen.fill((30,30,244))
             
-    screen.blit(geometry_bg,(0,0))
-    screen.blit(geometry_surface,(325,65))
-    screen.blit(geometry_pb, (480,260))
-    screen.blit(cEdit, (200, 260))
-    screen.blit(geometry_editor, (750, 260))
-    # pygame.draw.rect(geometry_surface,'Black',geometry_rect, 700)
-    
-    mouse_pos = pygame.mouse.get_pos()
-    # if gdpb_rect.collidepoint((mouse_pos)):
-    #     print(pygame.mouse.get_pressed())
-    # if event.type == pygame.MOUSEBUTTONDOWN:
-    #     print('player is choosing a level')
-    
-    if event.type == pygame.MOUSEBUTTONDOWN:
-        if gdpb_rect.collidepoint(event.pos):
-            print('player touched the pb')
-    if event.type == pygame.MOUSEBUTTONDOWN:
-        if gd_editor_rect.collidepoint(event.pos):
-            print('Player Touched the editor button')
-    if event.type == pygame.MOUSEBUTTONDOWN:
-        if cedit_rect.collidepoint(event.pos):
-            print('Player Touched the Character Editor button')
-           
 
 
- 
+        
 
         # if mouse_pos.collidepoint(geometry_pb):
         #     print('Player mouse is on Play button')

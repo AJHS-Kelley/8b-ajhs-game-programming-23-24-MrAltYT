@@ -37,6 +37,8 @@ def player_controls(event1, event2, keys):
     if keys[pygame.K_SPACE]:
         print('jump')
     event2 = keys
+    if keys[pygame.K_UP]:
+        print('jump')
     return player_controls
 
 
@@ -66,6 +68,7 @@ geometry_editor = pygame.image.load('img/editor button.png').convert_alpha()
 geometry_pb = pygame.image.load('img/Gd play.jpg').convert_alpha()
 gdpb_rect = geometry_pb.get_rect(center = (520,260))
 gd_editor_rect = geometry_editor.get_rect(center = (750, 260))
+cedit_rect = cEdit.get_rect(center = (200,260))
 
 def start_screen():
     """main menu. option to switch level, and controls guide, and game overview."""
@@ -88,6 +91,38 @@ def start_screen():
         level_memo = font.render(f"Level {level + 1}.", True, (255, 255, 0)).convert_alpha()
         screen.blit(level_memo, (100, 200))
 
+def __init__(self, image, platforms, pos, *groups):
+    """
+        :param image: block face avatar
+        :param platforms: obstacles such as coins, blocks, spikes, and orbs
+        :param pos: starting position
+        :param groups: takes any number of sprite groups.
+    """
+    class super():__init__(*groups)
+    self.onGround = False  # player on ground?
+    self.platforms = platforms  # obstacles but create a class variable for it
+    self.died = False  # player died?
+    self.win = False  # player beat level?
+
+    self.image = pygame.transform.smoothscale(image, (32, 32))
+    self.rect = self.image.get_rect(center=pos)  # get rect gets a Rect object from the image
+    self.jump_amount = 10  # jump strength
+    self.particles = []  # player trail
+    self.isjump = False  # is the player jumping?
+    self.vel = Vector2(0, 0)  # velocity starts at zero
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -97,6 +132,11 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
+        elif event.type == pygame.K_ESCAPE:
+            print(input('Are you sure you want to leave?'))
+            if event.type == pygame.K_KP_ENTER:
+                pygame.quit()
+                exit()
             
             
     screen.blit(geometry_bg,(0,0))
@@ -111,13 +151,21 @@ while True:
     #     print(pygame.mouse.get_pressed())
     # if event.type == pygame.MOUSEBUTTONDOWN:
     #     print('player is choosing a level')
-
+    
     if event.type == pygame.MOUSEBUTTONDOWN:
         if gdpb_rect.collidepoint(event.pos):
             print('player touched the pb')
     if event.type == pygame.MOUSEBUTTONDOWN:
         if gd_editor_rect.collidepoint(event.pos):
             print('Player Touched the editor button')
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        if cedit_rect.collidepoint(event.pos):
+            print('Player Touched the Character Editor button')
+           
+
+
+ 
+
         # if mouse_pos.collidepoint(geometry_pb):
         #     print('Player mouse is on Play button')
         

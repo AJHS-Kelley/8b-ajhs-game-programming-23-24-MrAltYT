@@ -260,6 +260,38 @@ class End(Draw):
         super().__init__(image, pos, *groups)
 
 
+def blitRotate(surf, image, pos, originpos: tuple, angle: float):
+    """
+    rotate the player
+    :param surf: Surface
+    :param image: image to rotate
+    :param pos: position of image
+    :param originpos: x, y of the origin to rotate about
+    :param angle: angle to rotate
+    """
+    # calcaulate the axis aligned bounding box of the rotated image
+    w, h = image.get_size()
+    box = [Vector2(p) for p in [(0, 0), (w, 0), (w, -h), (0, -h)]]
+    box_rotate = [p.rotate(angle) for p in box]
+
+    # make sure the player does not overlap, uses a few lambda functions(new things that we did not learn about number1)
+    min_box = (min(box_rotate, key=lambda p: p[0])[0], min(box_rotate, key=lambda p: p[1])[1])
+    max_box = (max(box_rotate, key=lambda p: p[0])[0], max(box_rotate, key=lambda p: p[1])[1])
+    # calculate the translation of the pivot
+    pivot = Vector2(originpos[0], -originpos[1])
+    pivot_rotate = pivot.rotate(angle)
+    pivot_move = pivot_rotate - pivot
+
+    # calculate the upper left origin of the rotated image
+    origin = (pos[0] - originpos[0] + min_box[0] - pivot_move[0], pos[1] - originpos[1] - max_box[1] + pivot_move[1])
+
+    # get a rotated image
+    rotated_image = pygame.transform.rotozoom(image, angle, 1)
+
+    # rotate and blit the image
+    surf.blit(rotated_image, origin)
+
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -287,7 +319,7 @@ while True:
         """"Game Menu Controls"""
         if event.type == pygame.MOUSEBUTTONDOWN:
             if gdpb_rect.collidepoint(event.pos):
-                screen.fill((94,129,162))
+               geometry_pb = pygame.transform.rotozoom(geometry_editor,60, 1)
         if event.type == pygame.MOUSEBUTTONDOWN:
             if gd_editor_rect.collidepoint(event.pos):
                 screen.fill((150,0,0))

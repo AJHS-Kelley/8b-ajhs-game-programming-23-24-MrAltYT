@@ -1,0 +1,15 @@
+{
+    "python.analysis.typeCheckingMode": "basic",
+    "workbench.colorCustomizations": {
+        "[01e61500-862c-41cd-b653-48d2ef7b1882]": {}
+    },
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./Testing_99",
+        "-p",
+        "*test.py"
+    ],
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": true
+}

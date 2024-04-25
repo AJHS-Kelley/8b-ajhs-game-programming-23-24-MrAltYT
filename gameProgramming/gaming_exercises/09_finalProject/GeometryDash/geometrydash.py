@@ -3,6 +3,7 @@
 # Kelley -- 04/25/24 -- Code Review 
 # Create 'HEADERS' for each section of your code, such as 'Controls' or 'Screen Information' to keep the data organized. 
 # Create a variable to track the current game level, use if and screen.blit() to display the correct level using that variable. 
+# Start working on an actual playable level! 
 
 import pygame, csv, os, random
 from sys import exit

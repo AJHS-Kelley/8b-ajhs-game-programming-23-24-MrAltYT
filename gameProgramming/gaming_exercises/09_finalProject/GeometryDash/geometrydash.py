@@ -1,11 +1,13 @@
 # 8B Geometry Dash Sponsored by RobTop, Created by Johnson Traveon and Christain Ortiz v0.8.4.7
-import pygame
+
+# Kelley -- 04/25/24 -- Code Review 
+# Create 'HEADERS' for each section of your code, such as 'Controls' or 'Screen Information' to keep the data organized. 
+# Create a variable to track the current game level, use if and screen.blit() to display the correct level using that variable. 
+
+import pygame, csv, os, random
 from sys import exit
-import random
 from pygame.math import Vector2
 from pygame.draw import rect
-import csv
-import os
 
 '''VARIABLESSS'''
 screen1 = True

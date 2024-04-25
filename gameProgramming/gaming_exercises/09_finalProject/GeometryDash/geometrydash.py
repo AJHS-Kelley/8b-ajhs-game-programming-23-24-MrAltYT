@@ -4,14 +4,14 @@
 # Create 'HEADERS' for each section of your code, such as 'Controls' or 'Screen Information' to keep the data organized. 
 # Create a variable to track the current game level, use if and screen.blit() to display the correct level using that variable. 
 # Start working on an actual playable level! 
-
+'Import Modules'
 import pygame, csv, os, random
 from sys import exit
 from pygame.math import Vector2
 from pygame.draw import rect
 
 '''VARIABLESSS'''
-screen1 = True
+screen = True
 screen2 = False
 screen3 = False
 particles = []
@@ -19,14 +19,12 @@ orbs = []
 win_cubes = []
 resolution = 1
 
+'Game Active/ Levels'
+level1 = 'Zodiac'
+level2 = 'digital descent'
+game_active =  False
 
-def eval_outcome(won: bool, died: bool):
-    """simple function to run the win or die screen after checking won or died"""
-    # if won:
-    #     won_screen()
-    # if died:
-    #     death_screen()
-    
+
 if resolution == 1:
     x = 1152
     y = 648
@@ -35,9 +33,9 @@ elif resolution == 0:
     y = 600
 else:
     print('This game only runs on Resolution 0 or 1.')
-gameplay = 2
-if gameplay == 2:
-    pass
+    
+    
+'''More Variables'''
 welcome = 'geometry dash'
 start = False
 zodiac_Dis = 'top 1 hardest demon from 2018 - 2023'
@@ -46,8 +44,6 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
-screen2 = '' #LEVEL PICKER
-screen3 = "" #LEVEL
 GRAVITY = Vector2(0, 0.86)
 
 # BINTRICALIZATIONALISM
@@ -70,34 +66,36 @@ class Draw(pygame.sprite.Sprite):
         self.image = image
         self.rect = self.image.get_rect(topleft=pos)
 
-
+def eval_outcome(won: bool, died: bool):
+    """simple function to run the win or die screen after checking won or died"""
+    # if won:
+    #     won_screen()
+    # if died:
+    #     death_screen()
 
 pygame.init()
 # SENSAGREGORY INSTINCTUAL HOLOSCHLATERIAL
-
+'''SURFACES'''
 screen = pygame.display.set_mode((x,y))
+screen2 = pygame.display.set_mode((x,y))
 alpha_surf = pygame.Surface(screen.get_size(), pygame.SRCALPHA)
     
 pygame.display.set_caption('Geometry Dash')
 clock = pygame.time.Clock()
 
-game_active = True
-
 geometry_bg = pygame.image.load('img/Gd background.jpg').convert_alpha()
 cEdit = pygame.image.load('img/GD CEdit.jpg').convert_alpha()
-font = pygame.font.Font('img/Seagram.ttf', 80)
+font = pygame.font.Font('img/Seagram.ttf', 60)
 tip = font.render("tip: tap and hold for the first few seconds of the level", True, BLUE)
 geometry_surface = font.render('geometry dash', True, 'Green').convert_alpha()
 geometry_editor = pygame.image.load('img/editor button.png').convert_alpha()
 playership = pygame.image.load('img/bird_108.png').convert_alpha()
-
 # geometry_rect = geometry_surface.get_rect(center = (400,150))
-
 geometry_pb = pygame.image.load('img/Gd play.jpg').convert_alpha()
 gdpb_rect = geometry_pb.get_rect(center = (550,300))
 gd_editor_rect = geometry_editor.get_rect(center = (775, 300))
 cedit_rect = cEdit.get_rect(center = (225,290))
-
+demonface = pygame.image.load('img/sed.png')
 
 class Player(pygame.sprite.Sprite):
     """Class for player. Holds update method, win and die variables, collisions and more."""
@@ -150,7 +148,6 @@ class Player(pygame.sprite.Sprite):
                 sees if player is colliding with any obstacles"""
                 if isinstance(p, Orb) and ([pygame.K_UP] or [pygame.K_SPACE]):
                     pygame.draw.circle(alpha_surf, (255, 255, 0), p.rect.center, 18)
-                    screen.blit(pygame.image.load("images/editor-0.9s-47px.gif"), p.rect.center)
                     self.jump_amount = 12  # gives a little boost when hit orb
                     self.jump()
                     self.jump_amount = 10  # return jump_amount to normal
@@ -306,23 +303,12 @@ while True:
                 pygame.quit()
                 exit()
     
-    if game_active:
         
         screen.blit(geometry_bg,(0,0))
         screen.blit(geometry_surface,(325,65))
         screen.blit(geometry_pb, (480,260))
         screen.blit(cEdit, (200, 260))
         screen.blit(geometry_editor, (750, 260))
-        # pygame.draw.rect(geometry_surface,'Black',geometry_rect, 700)
-        
-        mouse_pos = pygame.mouse.get_pos()
-
-
-        
-        """"Game Menu Controls"""
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if gdpb_rect.collidepoint(event.pos):
-               geometry_pb = pygame.transform.rotozoom(geometry_editor,60, 1)
         if event.type == pygame.MOUSEBUTTONDOWN:
             if gd_editor_rect.collidepoint(event.pos):
                 screen.fill((150,0,0))
@@ -330,6 +316,22 @@ while True:
             if cedit_rect.collidepoint(event.pos):
                 screen.fill('Purple')
                 screen.blit(playership, (400,300))
+        # pygame.draw.rect(geometry_surface,'Black',geometry_rect, 700)
+        
+
+        """Game Menu Contront"""
+        if event.type == pygame.MOUSEBUTTONDOWN:
+                if gdpb_rect.collidepoint(event.pos):
+                    game_active = True
+        if game_active == True:
+            screen = screen2
+            screen.blit(geometry_bg, (0,0))
+            screen.blit(demonface, (300,75))
+            geometry_surface = font.render('Zodiac', False, WHITE)
+            screen.blit(geometry_surface, (500,200))
+            pygame.mixer.Sound('audio/')
+                    
+
             
 
 

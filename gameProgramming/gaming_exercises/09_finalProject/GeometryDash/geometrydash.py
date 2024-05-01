@@ -10,6 +10,9 @@ from sys import exit
 from pygame.math import Vector2
 from pygame.draw import rect
 
+'''Debugging Logs'''
+logFile = "geometrydashDebugLog.txt"
+logData = open(logFile, "w") 
 '''VARIABLESSS'''
 screen = True
 screen2 = False

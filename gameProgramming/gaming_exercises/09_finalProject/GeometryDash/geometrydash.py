@@ -9,11 +9,16 @@ import pygame, csv, os, random
 from sys import exit
 from pygame.math import Vector2
 from pygame.draw import rect
-
+import gd
 '''Debugging Logs'''
 logFile = "geometrydashDebugLog.txt"
 logData = open(logFile, "w") 
-'''VARIABLESSS'''
+
+
+
+
+
+'''VARIABLESSS OF MY OWN'''
 screen = True
 screen2 = False
 screen3 = False
@@ -21,13 +26,21 @@ particles = []
 orbs = []
 win_cubes = []
 resolution = 1
-
+welcome = 'geometry dash'
+start = False
+zodiac_Dis = 'top 1 hardest demon from 2018 - 2023'
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+GRAVITY = Vector2(0, 0.86)
 'Game Active/ Levels'
 level1 = 'Zodiac'
 level2 = 'digital descent'
 game_active =  False
 
-
+'''Resolution'''
 if resolution == 1:
     x = 1152
     y = 648
@@ -38,18 +51,154 @@ else:
     print('This game only runs on Resolution 0 or 1.')
     
     
-'''More Variables'''
-welcome = 'geometry dash'
-start = False
-zodiac_Dis = 'top 1 hardest demon from 2018 - 2023'
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-GRAVITY = Vector2(0, 0.86)
+
 
 # BINTRICALIZATIONALISM
+def start_screen():
+    """main menu. option to switch level, and controls guide, and game overview."""
+    global level
+    if not start:
+        screen.fill(BLACK)
+        if pygame.key.get_pressed()[pygame.K_1]:
+            level = 0
+        if pygame.key.get_pressed()[pygame.K_2]:
+            level = 1
+
+        welcome = font.render(f"Welcome to Pydash. choose level({level + 1}) by keypad", True, WHITE)
+
+        controls = font.render("Controls: jump: Space/Up exit: Esc", True, GREEN)
+
+        screen.blits([[welcome, (100, 100)], [controls, (100, 400)], [tip, (100, 500)]])
+
+        level_memo = font.render(f"Level {level + 1}.", True, (255, 255, 0))
+        screen.blit(level_memo, (100, 200))
+        
+def wait_for_key():
+    """separate game loop for waiting for a key press while still running game loop
+    """
+    global level, start
+    waiting = True
+    while waiting:
+        clock.tick(60)
+        pygame.display.flip()
+
+        if not start:
+            start_screen()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    start = True
+                    waiting = False
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+
+
+def coin_count(coins):
+    """counts coins"""
+    if coins >= 3:
+        coins = 3
+    coins += 1
+    return coins
+
+
+def resize(img, size=(32, 32)):
+    """resize images
+    :param img: image to resize
+    :type img: im not sure, probably an object
+    :param size: default is 32 because that is the tile size
+    :type size: tuple
+    :return: resized img
+
+    :rtype:object?
+    """
+    resized = pygame.transform.smoothscale(img, size)
+    return resized
+
+
+# SENSAGREGORY INSTINCTUAL HOLOSCHLATERIAL
+'''SURFACES'''
+screen = pygame.display.set_mode((x,y))
+screen2 = pygame.display.set_mode((x,y))
+alpha_surf = pygame.Surface(screen.get_size(), pygame.SRCALPHA)
+    
+pygame.display.set_caption('Geometry Dash')
+clock = pygame.time.Clock()
+
+geometry_bg = pygame.image.load('img/Gd background.jpg').convert_alpha()
+cEdit = pygame.image.load('img/GD CEdit.jpg').convert_alpha()
+font = pygame.font.Font('img/Seagram.ttf', 60)
+tip = font.render("tip: tap and hold for the first few seconds of the level", True, BLUE)
+geometry_surface = font.render('geometry dash', True, 'Green').convert_alpha()
+geometry_editor = pygame.image.load('img/editor button.png').convert_alpha()
+playership = pygame.image.load('img/bird_108.png').convert_alpha()
+# geometry_rect = geometry_surface.get_rect(center = (400,150))
+geometry_pb = pygame.image.load('img/Gd play.jpg').convert_alpha()
+gdpb_rect = geometry_pb.get_rect(center = (550,300))
+gd_editor_rect = geometry_editor.get_rect(center = (775, 300))
+cedit_rect = cEdit.get_rect(center = (225,290))
+demonface = pygame.image.load('img/sed.png')
+font = pygame.font.SysFont("lucidaconsole", 20)
+
+# square block face is main character the icon of the window is the block face
+avatar = pygame.image.load("img/images", "avatar.png")  # load the main character
+pygame.display.set_icon(avatar)
+#  this surface has an alpha value with the colors, so the player trail will fade away using opacity
+alpha_surf = pygame.Surface(screen.get_size(), pygame.SRCALPHA)
+
+# sprite groups
+player_sprite = pygame.sprite.Group()
+elements = pygame.sprite.Group()
+
+# images
+spike = pygame.image.load("images", "obj-spike.png")
+spike = resize(spike)
+coin = pygame.image.load("images", "coin.png")
+coin = pygame.transform.smoothscale(coin, (32, 32))
+block = pygame.image.load("images", "block_1.png")
+block = pygame.transform.smoothscale(block, (32, 32))
+orb = pygame.image.load("images", "orb-yellow.png")
+orb = pygame.transform.smoothscale(orb, (32, 32))
+trick = pygame.image.load("images", "obj-breakable.png")
+trick = pygame.transform.smoothscale(trick, (32, 32))
+
+#  ints
+fill = 0
+num = 0
+CameraX = 0
+attempts = 0
+coins = 0
+angle = 0
+level = 0
+
+# list
+particles = []
+orbs = []
+win_cubes = []
+
+# initialize level with
+levels = ["level_1.csv", "level_2.csv"]
+level_list = block_map(levels[level])
+level_width = (len(level_list[0]) * 32)
+level_height = len(level_list) * 32
+init_level(level_list)
+
+# set window title suitable for game
+pygame.display.set_caption('Pydash: Geometry Dash in Python')
+
+# initialize the font variable to draw text later
+text = font.render('image', False, (255, 255, 0))
+
+# music
+music = pygame.mixer_music.load("img/music", "bossfight-Vextron.mp3")
+pygame.mixer_music.play()
+
+
+# show tip on start and on death
+tip = font.render("tip: tap and hold for the first few seconds of the level", True, BLUE)
+
 
 def player_controls(event1, event2, keys):
     event1 = pygame.MOUSEBUTTONDOWN
@@ -75,30 +224,6 @@ def eval_outcome(won: bool, died: bool):
     #     won_screen()
     # if died:
     #     death_screen()
-
-pygame.init()
-# SENSAGREGORY INSTINCTUAL HOLOSCHLATERIAL
-'''SURFACES'''
-screen = pygame.display.set_mode((x,y))
-screen2 = pygame.display.set_mode((x,y))
-alpha_surf = pygame.Surface(screen.get_size(), pygame.SRCALPHA)
-    
-pygame.display.set_caption('Geometry Dash')
-clock = pygame.time.Clock()
-
-geometry_bg = pygame.image.load('img/Gd background.jpg').convert_alpha()
-cEdit = pygame.image.load('img/GD CEdit.jpg').convert_alpha()
-font = pygame.font.Font('img/Seagram.ttf', 60)
-tip = font.render("tip: tap and hold for the first few seconds of the level", True, BLUE)
-geometry_surface = font.render('geometry dash', True, 'Green').convert_alpha()
-geometry_editor = pygame.image.load('img/editor button.png').convert_alpha()
-playership = pygame.image.load('img/bird_108.png').convert_alpha()
-# geometry_rect = geometry_surface.get_rect(center = (400,150))
-geometry_pb = pygame.image.load('img/Gd play.jpg').convert_alpha()
-gdpb_rect = geometry_pb.get_rect(center = (550,300))
-gd_editor_rect = geometry_editor.get_rect(center = (775, 300))
-cedit_rect = cEdit.get_rect(center = (225,290))
-demonface = pygame.image.load('img/sed.png')
 
 class Player(pygame.sprite.Sprite):
     """Class for player. Holds update method, win and die variables, collisions and more."""
@@ -189,7 +314,7 @@ class Player(pygame.sprite.Sprite):
                         self.vel.x = 0
                         self.rect.right = p.rect.left  # dont let player go through walls
                         self.died = True
-
+    '''Player movement'''
     def jump(self):
         self.vel.y = -self.jump_amount  # players vertical velocity is negative so ^
 
@@ -293,6 +418,9 @@ def blitRotate(surf, image, pos, originpos: tuple, angle: float):
 
     # rotate and blit the image
     surf.blit(rotated_image, origin)
+
+
+
 
 
 while True:

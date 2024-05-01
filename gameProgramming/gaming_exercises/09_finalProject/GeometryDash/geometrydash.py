@@ -9,13 +9,12 @@ import pygame, csv, os, random
 from sys import exit
 from pygame.math import Vector2
 from pygame.draw import rect
-import gd
 '''Debugging Logs'''
 logFile = "geometrydashDebugLog.txt"
 logData = open(logFile, "w") 
 
 
-
+pygame.init()
 
 
 '''VARIABLESSS OF MY OWN'''
@@ -54,54 +53,7 @@ else:
 
 
 # BINTRICALIZATIONALISM
-def start_screen():
-    """main menu. option to switch level, and controls guide, and game overview."""
-    global level
-    if not start:
-        screen.fill(BLACK)
-        if pygame.key.get_pressed()[pygame.K_1]:
-            level = 0
-        if pygame.key.get_pressed()[pygame.K_2]:
-            level = 1
 
-        welcome = font.render(f"Welcome to Pydash. choose level({level + 1}) by keypad", True, WHITE)
-
-        controls = font.render("Controls: jump: Space/Up exit: Esc", True, GREEN)
-
-        screen.blits([[welcome, (100, 100)], [controls, (100, 400)], [tip, (100, 500)]])
-
-        level_memo = font.render(f"Level {level + 1}.", True, (255, 255, 0))
-        screen.blit(level_memo, (100, 200))
-        
-def wait_for_key():
-    """separate game loop for waiting for a key press while still running game loop
-    """
-    global level, start
-    waiting = True
-    while waiting:
-        clock.tick(60)
-        pygame.display.flip()
-
-        if not start:
-            start_screen()
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    start = True
-                    waiting = False
-                if event.key == pygame.K_ESCAPE:
-                    pygame.quit()
-
-
-def coin_count(coins):
-    """counts coins"""
-    if coins >= 3:
-        coins = 3
-    coins += 1
-    return coins
 
 
 def resize(img, size=(32, 32)):
@@ -127,6 +79,7 @@ alpha_surf = pygame.Surface(screen.get_size(), pygame.SRCALPHA)
 pygame.display.set_caption('Geometry Dash')
 clock = pygame.time.Clock()
 
+
 geometry_bg = pygame.image.load('img/Gd background.jpg').convert_alpha()
 cEdit = pygame.image.load('img/GD CEdit.jpg').convert_alpha()
 font = pygame.font.Font('img/Seagram.ttf', 60)
@@ -142,8 +95,11 @@ cedit_rect = cEdit.get_rect(center = (225,290))
 demonface = pygame.image.load('img/sed.png')
 font = pygame.font.SysFont("lucidaconsole", 20)
 
+start_screen = [geometry_bg, gdpb_rect, geometry_pb, geometry_editor, gd_editor_rect, cEdit, cedit_rect]
+if not start:
+    start_screen[0]
 # square block face is main character the icon of the window is the block face
-avatar = pygame.image.load("img/images", "avatar.png")  # load the main character
+avatar = pygame.image.load("img/avatar.jpg", "avatar.png")  # load the main character
 pygame.display.set_icon(avatar)
 #  this surface has an alpha value with the colors, so the player trail will fade away using opacity
 alpha_surf = pygame.Surface(screen.get_size(), pygame.SRCALPHA)
@@ -153,15 +109,15 @@ player_sprite = pygame.sprite.Group()
 elements = pygame.sprite.Group()
 
 # images
-spike = pygame.image.load("images", "obj-spike.png")
+spike = pygame.image.load("img/images/obj-spike.png")
 spike = resize(spike)
-coin = pygame.image.load("images", "coin.png")
+coin = pygame.image.load("img/images/coin.png")
 coin = pygame.transform.smoothscale(coin, (32, 32))
-block = pygame.image.load("images", "block_1.png")
+block = pygame.image.load("img/images/block_1.png")
 block = pygame.transform.smoothscale(block, (32, 32))
-orb = pygame.image.load("images", "orb-yellow.png")
+orb = pygame.image.load("img/images/orb-yellow.png")
 orb = pygame.transform.smoothscale(orb, (32, 32))
-trick = pygame.image.load("images", "obj-breakable.png")
+trick = pygame.image.load("img/images/obj-breakable.png")
 trick = pygame.transform.smoothscale(trick, (32, 32))
 
 #  ints
@@ -179,11 +135,6 @@ orbs = []
 win_cubes = []
 
 # initialize level with
-levels = ["level_1.csv", "level_2.csv"]
-level_list = block_map(levels[level])
-level_width = (len(level_list[0]) * 32)
-level_height = len(level_list) * 32
-init_level(level_list)
 
 # set window title suitable for game
 pygame.display.set_caption('Pydash: Geometry Dash in Python')
@@ -192,7 +143,7 @@ pygame.display.set_caption('Pydash: Geometry Dash in Python')
 text = font.render('image', False, (255, 255, 0))
 
 # music
-music = pygame.mixer_music.load("img/music", "bossfight-Vextron.mp3")
+music = pygame.mixer_music.load("img/music/bossfight-Vextron.mp3")
 pygame.mixer_music.play()
 
 
@@ -250,101 +201,9 @@ class Player(pygame.sprite.Sprite):
         self.isjump = False  # is the player jumping?
         self.vel = Vector2(0, 0)  # velocity starts at zero
 
-    def draw_particle_trail(self, x, y, color=(255, 255, 255)):
-        """draws a trail of particle-rects in a line at random positions behind the player"""
-
-        self.particles.append(
-                [[x - 5, y - 8], [random.randint(0, 25) / 10 - 1, random.choice([0, 0])],
-                 random.randint(5, 8)])
-
-        for particle in self.particles:
-            particle[0][0] += particle[1][0]
-            particle[0][1] += particle[1][1]
-            particle[2] -= 0.5
-            particle[1][0] -= 0.4
-            rect(alpha_surf, color,
-                 ([int(particle[0][0]), int(particle[0][1])], [int(particle[2]) for i in range(2)]))
-            if particle[2] <= 0:
-                self.particles.remove(particle)
-
-    def collide(self, yvel, platforms):
-        global coins
-
-        for p in platforms:
-            if pygame.sprite.collide_rect(self, p):
-                """pygame sprite builtin collision method,
-                sees if player is colliding with any obstacles"""
-                if isinstance(p, Orb) and ([pygame.K_UP] or [pygame.K_SPACE]):
-                    pygame.draw.circle(alpha_surf, (255, 255, 0), p.rect.center, 18)
-                    self.jump_amount = 12  # gives a little boost when hit orb
-                    self.jump()
-                    self.jump_amount = 10  # return jump_amount to normal
-
-                if isinstance(p, End):
-                    self.win = True
-
-                if isinstance(p, Spike):
-                    self.died = True  # die on spike
-
-                if isinstance(p, Coin):
-                    # keeps track of all coins throughout the whole game(total of 6 is possible)
-                    coins += 1
-
-                    # erases a coin
-                    p.rect.x = 0
-                    p.rect.y = 0
-
-                if isinstance(p, Platform):  # these are the blocks (may be confusing due to self.platforms)
-
-                    if yvel > 0:
-                        """if player is going down(yvel is +)"""
-                        self.rect.bottom = p.rect.top  # dont let the player go through the ground
-                        self.vel.y = 0  # rest y velocity because player is on ground
-
-                        # set self.onGround to true because player collided with the ground
-                        self.onGround = True
-
-                        # reset jump
-                        self.isjump = False
-                    elif yvel < 0:
-                        """if yvel is (-),player collided while jumping"""
-                        self.rect.top = p.rect.bottom  # player top is set the bottom of block like it hits it head
-                    else:
-                        """otherwise, if player collides with a block, he/she dies."""
-                        self.vel.x = 0
-                        self.rect.right = p.rect.left  # dont let player go through walls
-                        self.died = True
+ 
     '''Player movement'''
-    def jump(self):
-        self.vel.y = -self.jump_amount  # players vertical velocity is negative so ^
 
-    def update(self):
-        """update player"""
-        if self.isjump:
-            if self.onGround:
-                """if player wants to jump and player is on the ground: only then is jump allowed"""
-                self.jump()
-
-        if not self.onGround:  # only accelerate with gravity if in the air
-            self.vel += GRAVITY  # Gravity falls
-
-            # max falling speed
-            if self.vel.y > 100: self.vel.y = 100
-
-        # do x-axis collisions
-        self.collide(0, self.platforms)
-
-        # increment in y direction
-        
-
-        # assuming player in the air, and if not it will be set to inversed after collide
-        self.onGround = False
-
-        # do y-axis collisions
-        self.collide(self.vel.y, self.platforms)
-
-        # check if we won or if player won
-        eval_outcome(self.win, self.died)
 """WAITTTT"""
 class Platform(Draw):
     """block"""
@@ -388,36 +247,6 @@ class End(Draw):
         super().__init__(image, pos, *groups)
 
 
-def blitRotate(surf, image, pos, originpos: tuple, angle: float):
-    """
-    rotate the player
-    :param surf: Surface
-    :param image: image to rotate
-    :param pos: position of image
-    :param originpos: x, y of the origin to rotate about
-    :param angle: angle to rotate
-    """
-    # calcaulate the axis aligned bounding box of the rotated image
-    w, h = image.get_size()
-    box = [Vector2(p) for p in [(0, 0), (w, 0), (w, -h), (0, -h)]]
-    box_rotate = [p.rotate(angle) for p in box]
-
-    # make sure the player does not overlap, uses a few lambda functions(new things that we did not learn about number1)
-    min_box = (min(box_rotate, key=lambda p: p[0])[0], min(box_rotate, key=lambda p: p[1])[1])
-    max_box = (max(box_rotate, key=lambda p: p[0])[0], max(box_rotate, key=lambda p: p[1])[1])
-    # calculate the translation of the pivot
-    pivot = Vector2(originpos[0], -originpos[1])
-    pivot_rotate = pivot.rotate(angle)
-    pivot_move = pivot_rotate - pivot
-
-    # calculate the upper left origin of the rotated image
-    origin = (pos[0] - originpos[0] + min_box[0] - pivot_move[0], pos[1] - originpos[1] - max_box[1] + pivot_move[1])
-
-    # get a rotated image
-    rotated_image = pygame.transform.rotozoom(image, angle, 1)
-
-    # rotate and blit the image
-    surf.blit(rotated_image, origin)
 
 
 
@@ -460,7 +289,7 @@ while True:
             screen.blit(demonface, (300,75))
             geometry_surface = font.render('Zodiac', False, WHITE)
             screen.blit(geometry_surface, (500,200))
-            pygame.mixer.Sound('audio/')
+            
                     
 
             

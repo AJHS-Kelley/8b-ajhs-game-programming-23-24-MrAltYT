@@ -83,17 +83,19 @@ clock = pygame.time.Clock()
 geometry_bg = pygame.image.load('img/Gd background.jpg').convert_alpha()
 cEdit = pygame.image.load('img/GD CEdit.jpg').convert_alpha()
 font = pygame.font.Font('img/Seagram.ttf', 60)
+font2 = pygame.font.Font('img/Seagram.ttf', 40)
 tip = font.render("tip: tap and hold for the first few seconds of the level", True, BLUE)
 geometry_surface = font.render('geometry dash', True, 'Green').convert_alpha()
 geometry_editor = pygame.image.load('img/editor button.png').convert_alpha()
 playership = pygame.image.load('img/bird_108.png').convert_alpha()
 # geometry_rect = geometry_surface.get_rect(center = (400,150))
 geometry_pb = pygame.image.load('img/Gd play.jpg').convert_alpha()
-gdpb_rect = geometry_pb.get_rect(center = (550,300))
+gdpb_rect = geometry_pb.get_rect(center = (550,330))
 gd_editor_rect = geometry_editor.get_rect(center = (775, 300))
 cedit_rect = cEdit.get_rect(center = (225,290))
 demonface = pygame.image.load('img/sed.png')
 font = pygame.font.SysFont("lucidaconsole", 20)
+
 
 start_screen = [geometry_bg, gdpb_rect, geometry_pb, geometry_editor, gd_editor_rect, cEdit, cedit_rect]
 if not start:
@@ -143,7 +145,7 @@ pygame.display.set_caption('Pydash: Geometry Dash in Python')
 text = font.render('image', False, (255, 255, 0))
 
 # music
-music = pygame.mixer_music.load("img/music/bossfight-Vextron.mp3")
+music = pygame.mixer_music.load("img/music/Corrison.mp3")
 pygame.mixer_music.play()
 
 
@@ -266,7 +268,7 @@ while True:
         
         screen.blit(geometry_bg,(0,0))
         screen.blit(geometry_surface,(325,65))
-        screen.blit(geometry_pb, (480,260))
+        screen.blit(geometry_pb, gdpb_rect)
         screen.blit(cEdit, (200, 260))
         screen.blit(geometry_editor, (750, 260))
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -286,9 +288,10 @@ while True:
         if game_active == True:
             screen = screen2
             screen.blit(geometry_bg, (0,0))
-            screen.blit(demonface, (300,75))
-            geometry_surface = font.render('Zodiac', False, WHITE)
-            screen.blit(geometry_surface, (500,200))
+            surf_of_levels = screen.fill('Gray')
+            screen.blit(demonface, (300,130))
+            screen.blit(geometry_surface, (500,275))
+            geometry_surface = font2.render('Zodiac', False, WHITE)
             
                     
 

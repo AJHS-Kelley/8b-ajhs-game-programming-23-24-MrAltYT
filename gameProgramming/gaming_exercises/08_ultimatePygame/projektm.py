@@ -77,3 +77,47 @@ while True:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def init_level(map):
+    """this is similar to 2d lists. it goes through a list of lists, and creates instances of certain obstacles
+    depending on the item in the list"""
+    x = 0
+    y = 0
+
+    for row in map:
+        for col in row:
+
+            if col == "0":
+                Platform(block, (x, y), elements)
+
+            if col == "Coin":
+                Coin(coin, (x, y), elements)
+
+            if col == "Spike":
+                Spike(spike, (x, y), elements)
+            if col == "Orb":
+                orbs.append([x, y])
+
+                Orb(orb, (x, y), elements)
+
+            if col == "T":
+                Trick(trick, (x, y), elements)
+
+            if col == "End":
+                End(avatar, (x, y), elements)
+            x += 32
+        y += 32
+        x = 0

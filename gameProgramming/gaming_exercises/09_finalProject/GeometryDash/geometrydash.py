@@ -34,12 +34,12 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 GRAVITY = Vector2(0, 0.86)
-keys = pygame.key.get_pressed()
 'Game Active/ Levels'
 level1 = 'Zodiac'
 level2 = 'digital descent'
 game_active =  False
-
+level1_active = False
+level2_active = False
 '''Resolution'''
 if resolution == 1:
     x = 1152
@@ -86,7 +86,7 @@ cEdit = pygame.image.load('img/GD CEdit.jpg').convert_alpha()
 font = pygame.font.Font('img/Seagram.ttf', 60)
 font2 = pygame.font.Font('img/Seagram.ttf', 40)
 tip = font.render("tip: tap and hold for the first few seconds of the level", True, BLUE)
-geometry_surface = font.render('geometry dash', True, 'Green').convert_alpha()
+geometry_surface = font.render('geometry dash', True, 'Green')
 geometry_editor = pygame.image.load('img/editor button.png').convert_alpha()
 playership = pygame.image.load('img/bird_108.png').convert_alpha()
 # geometry_rect = geometry_surface.get_rect(center = (400,150))
@@ -264,7 +264,7 @@ while True:
             if event.type == pygame.K_KP_ENTER:
                 pygame.quit()
                 exit()
-    
+    keys = pygame.key.get_pressed()
     if game_active == False:    
         screen.blit(geometry_bg,(0,0))
         screen.blit(geometry_surface,(325,65))
@@ -287,13 +287,16 @@ while True:
                 game_active = True
     if game_active == True:
         screen = screen2
+        level_bg = pygame.image.load('img/ha.png')
+        level1_rect = level_bg.get_rect(center = (500,275))
+        screen.blit(level_bg, level1_rect)
         screen.blit(geometry_bg, (0,0))
-        surf_of_levels = screen.fill('Gray')
         screen.blit(demonface, (300,130))
-        geometry_surface = font2.render('Zodiac', False, WHITE)
-        screen.blit(geometry_surface, (500,275))
-        if keys[pygame.K_TAB]:
-            print('player pressed tab')
+        geometry_surface2 = font2.render('Zodiac', False, WHITE)
+        screen.blit(geometry_surface2, (500,275))
+        
+        if keys[pygame.K_BACKSPACE]:
+            game_active = False
 
 
 

@@ -282,18 +282,18 @@ while True:
         
 
         """Game Menu Contront"""
-        if event.type == pygame.MOUSEBUTTONDOWN:
-                if gdpb_rect.collidepoint(event.pos):
-                    game_active = True
-        if game_active == True:
-            screen = screen2
-            screen.blit(geometry_bg, (0,0))
-            surf_of_levels = screen.fill('Gray')
-            screen.blit(demonface, (300,130))
-            geometry_surface = font2.render('Zodiac', False, WHITE)
-            screen.blit(geometry_surface, (500,275))
-            if keys[pygame.K_ESCAPE]:
-                print('player pressed escape')
+    if event.type == pygame.MOUSEBUTTONDOWN:
+            if gdpb_rect.collidepoint(event.pos):
+                game_active = True
+    if game_active == True:
+        screen = screen2
+        screen.blit(geometry_bg, (0,0))
+        surf_of_levels = screen.fill('Gray')
+        screen.blit(demonface, (300,130))
+        geometry_surface = font2.render('Zodiac', False, WHITE)
+        screen.blit(geometry_surface, (500,275))
+        if keys[pygame.K_TAB]:
+            print('player pressed tab')
 
 
 

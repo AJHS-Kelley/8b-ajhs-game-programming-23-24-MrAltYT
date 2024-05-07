@@ -34,6 +34,7 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 GRAVITY = Vector2(0, 0.86)
+keys = pygame.key.get_pressed()
 'Game Active/ Levels'
 level1 = 'Zodiac'
 level2 = 'digital descent'
@@ -153,15 +154,14 @@ pygame.mixer_music.play()
 tip = font.render("tip: tap and hold for the first few seconds of the level", True, BLUE)
 
 
-def player_controls(event1, event2, keys):
+def player_controls(event1, event2):
     event1 = pygame.MOUSEBUTTONDOWN
-    keys = pygame.key.get_pressed()
     if keys[pygame.K_SPACE]:
         print('jump')
     event2 = keys
     if keys[pygame.K_UP]:
         print('jump')
-    return player_controls, keys
+    return player_controls
 
 class Draw(pygame.sprite.Sprite):
     """parent class to all obstacle classes; Sprite class"""
@@ -265,7 +265,7 @@ while True:
                 pygame.quit()
                 exit()
     
-        
+    if game_active == False:    
         screen.blit(geometry_bg,(0,0))
         screen.blit(geometry_surface,(325,65))
         screen.blit(geometry_pb, gdpb_rect)
@@ -290,10 +290,12 @@ while True:
             screen.blit(geometry_bg, (0,0))
             surf_of_levels = screen.fill('Gray')
             screen.blit(demonface, (300,130))
-            screen.blit(geometry_surface, (500,275))
             geometry_surface = font2.render('Zodiac', False, WHITE)
-            
-                    
+            screen.blit(geometry_surface, (500,275))
+            if keys[pygame.K_ESCAPE]:
+                print('player pressed escape')
+
+
 
             
 

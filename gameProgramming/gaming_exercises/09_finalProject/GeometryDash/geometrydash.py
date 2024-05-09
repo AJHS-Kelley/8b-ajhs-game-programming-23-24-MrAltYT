@@ -1,4 +1,4 @@
-# 8B Geometry Dash Sponsored by RobTop, Created by Johnson Traveon and Christain Ortiz v0.8.4.7
+# 8B Geometry Dash Sponsored by RobTop, Created by Johnson Traveon and Christain Ortiz v0.8.9
 
 # Kelley -- 04/25/24 -- Code Review 
 # Create 'HEADERS' for each section of your code, such as 'Controls' or 'Screen Information' to keep the data organized. 
@@ -293,10 +293,21 @@ while True:
         screen.blit(geometry_bg, (0,0))
         screen.blit(demonface, (300,130))
         geometry_surface2 = font2.render('Zodiac', False, WHITE)
+        dificulty = font.render('Escapulator', False, WHITE, BLACK)
         screen.blit(geometry_surface2, (500,275))
-        
+        screen.blit(dificulty, (300,250))
         if keys[pygame.K_BACKSPACE]:
             game_active = False
+        
+        '''Start of LEVEL Zodiac'''
+        if keys[pygame.K_SPACE]:
+            level1_active = True
+    if level1_active == True:
+        screen3 = True 
+        zodiac_bg = pygame.image.load('img/GD background.jpg')
+        screen.blit(zodiac_bg, (0,0))
+
+        
 
 
 

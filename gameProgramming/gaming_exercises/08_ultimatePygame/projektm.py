@@ -8,7 +8,7 @@ pygame.init()
 screen = pygame.display.set_mode((800,400))
 pygame.display.set_caption('A.R.G.U.S')
 clock = pygame.time.Clock()
-test_font = pygame.font.Font('img/Seagram_tfb 2.ttf', 33)
+test_font = pygame.font.Font('img/Seagram.ttf', 33)
 
 sky_surface = pygame.image.load('img/blossom.jpg').convert_alpha()
 ground_surface = pygame.image.load('img/ground.jpg').convert_alpha()
@@ -43,11 +43,11 @@ while True:
     screen.blit(Stars_surf, Stars_rect)
     screen.blit(player_surf,player_rect)
     
-    # if player_rect.colliderect(Stars_rect):
-    #     print('collision')
-    # mouse_pos = pygame.mouse.get_pos()
-    # if player_rect.collidepoint((mouse_pos)):
-    #     print(pygame.mouse.get_pressed())
+    if player_rect.colliderect(Stars_rect):
+        print('collision')
+    mouse_pos = pygame.mouse.get_pos()
+    if player_rect.collidepoint((mouse_pos)):
+        print(pygame.mouse.get_pressed())
 
     # Draw all our elements
     # Update everything

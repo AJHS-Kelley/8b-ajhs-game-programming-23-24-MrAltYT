@@ -1,4 +1,4 @@
-# 8B Geometry Dash Sponsored by RobTop, Created by Johnson Traveon and Christain Ortiz v0.8.9
+# 8B Geometry Dash Sponsored by RobTop, Created by Johnson Traveon and Christain Ortiz v0.9
 
 # Kelley -- 04/25/24 -- Code Review 
 # Create 'HEADERS' for each section of your code, such as 'Controls' or 'Screen Information' to keep the data organized. 
@@ -75,6 +75,7 @@ def resize(img, size=(32, 32)):
 '''SURFACES'''
 screen = pygame.display.set_mode((x,y))
 screen2 = pygame.display.set_mode((x,y))
+screen3 = pygame.display.set_mode((x,y))
 alpha_surf = pygame.Surface(screen.get_size(), pygame.SRCALPHA)
     
 pygame.display.set_caption('Geometry Dash')
@@ -86,7 +87,7 @@ cEdit = pygame.image.load('img/GD CEdit.jpg').convert_alpha()
 font = pygame.font.Font('img/Seagram.ttf', 60)
 font2 = pygame.font.Font('img/Seagram.ttf', 40)
 tip = font.render("tip: tap and hold for the first few seconds of the level", True, BLUE)
-geometry_surface = font.render('geometry dash', True, 'Green')
+geometry_surface = font.render('geometry dash', True, 'Green', None)
 geometry_editor = pygame.image.load('img/editor button.png').convert_alpha()
 playership = pygame.image.load('img/bird_108.png').convert_alpha()
 # geometry_rect = geometry_surface.get_rect(center = (400,150))
@@ -177,7 +178,8 @@ def eval_outcome(won: bool, died: bool):
     #     won_screen()
     # if died:
     #     death_screen()
-
+    
+'''PLAYER/SELF'''
 class Player(pygame.sprite.Sprite):
     """Class for player. Holds update method, win and die variables, collisions and more."""
     win: bool
@@ -253,7 +255,6 @@ class End(Draw):
 
 
 
-
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -298,7 +299,8 @@ while True:
         screen.blit(dificulty, (300,250))
         if keys[pygame.K_BACKSPACE]:
             game_active = False
-        
+        tips = font.render('Please press SPACE to play.', False, WHITE)
+        screen.blit(tips, (500,200))
         '''Start of LEVEL Zodiac'''
         if keys[pygame.K_SPACE]:
             level1_active = True
@@ -306,7 +308,17 @@ while True:
         screen3 = True 
         zodiac_bg = pygame.image.load('img/GD background.jpg')
         screen.blit(zodiac_bg, (0,0))
+        ALL_LEVELS_GROUND = pygame.image.load('img/Level_ground.png').convert_alpha()
+        level1_ground_rect = ALL_LEVELS_GROUND.get_rect(bottomleft = (50,750))
+        level1_ground_rect.x -= 50
+        if level1_ground_rect.right <= -300:
+            level1_ground_rect.left = 800
+            print('yes')
+        screen.blit(ALL_LEVELS_GROUND, level1_ground_rect)
+        ZODIAC = [screen3, zodiac_bg, ALL_LEVELS_GROUND]
+        
 
+        
         
 
 
@@ -331,7 +343,7 @@ while True:
         
         
         
-        
+    
         
     pygame.display.update()
     clock.tick(60)

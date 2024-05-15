@@ -33,7 +33,7 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
-GRAVITY = Vector2(0, 0.86)
+GRAVITY = 0
 'Game Active/ Levels'
 level1 = 'Zodiac'
 level2 = 'digital descent'
@@ -97,6 +97,8 @@ gd_editor_rect = geometry_editor.get_rect(center = (775, 300))
 cedit_rect = cEdit.get_rect(center = (225,290))
 demonface = pygame.image.load('img/sed.png')
 font = pygame.font.SysFont("lucidaconsole", 20)
+player = pygame.image.load('img/images/avatar.png')
+player_rect = player.get_rect(center = (200,300))
 
 
 start_screen = [geometry_bg, gdpb_rect, geometry_pb, geometry_editor, gd_editor_rect, cEdit, cedit_rect]
@@ -305,17 +307,28 @@ while True:
         if keys[pygame.K_SPACE]:
             level1_active = True
     if level1_active == True:
+        pygame.mixer.music.load("img/music/Castle-town.mp3")
+        pygame.mixer_music.play()
+        player_sprite = pygame.sprite.Group()
+        elements = pygame.sprite.Group()
         screen3 = True 
         zodiac_bg = pygame.image.load('img/GD background.jpg')
         screen.blit(zodiac_bg, (0,0))
         ALL_LEVELS_GROUND = pygame.image.load('img/Level_ground.png').convert_alpha()
-        level1_ground_rect = ALL_LEVELS_GROUND.get_rect(bottomleft = (50,750))
-        level1_ground_rect.x -= 50
-        if level1_ground_rect.right <= -300:
-            level1_ground_rect.left = 800
-            print('yes')
+        level1_ground_rect = ALL_LEVELS_GROUND.get_rect(topleft = (0,450))
         screen.blit(ALL_LEVELS_GROUND, level1_ground_rect)
-        ZODIAC = [screen3, zodiac_bg, ALL_LEVELS_GROUND]
+        GRAVITY += 1
+        player_rect.y += GRAVITY
+        if player_rect.y >= 410:
+            player_rect.y = 410
+        screen.blit(player, player_rect)
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                GRAVITY = -20
+        if event.type == pygame.KEYUP:
+            print('space key up')
+        ZODIAC = [screen3, zodiac_bg, ALL_LEVELS_GROUND, player, player_rect]
+         
         
 
         

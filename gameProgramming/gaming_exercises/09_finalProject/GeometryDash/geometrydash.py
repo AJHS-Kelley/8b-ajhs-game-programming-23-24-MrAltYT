@@ -99,6 +99,7 @@ demonface = pygame.image.load('img/sed.png')
 font = pygame.font.SysFont("lucidaconsole", 20)
 player = pygame.image.load('img/images/avatar.png')
 player_rect = player.get_rect(center = (200,300))
+player_rect.x += 50
 
 
 start_screen = [geometry_bg, gdpb_rect, geometry_pb, geometry_editor, gd_editor_rect, cEdit, cedit_rect]
@@ -117,15 +118,19 @@ elements = pygame.sprite.Group()
 # images
 spike = pygame.image.load("img/images/obj-spike.png")
 spike = resize(spike)
+spike_rect = spike.get_rect()
 coin = pygame.image.load("img/images/coin.png")
 coin = pygame.transform.smoothscale(coin, (32, 32))
+coin_rect = coin.get_rect()
 block = pygame.image.load("img/images/block_1.png")
 block = pygame.transform.smoothscale(block, (32, 32))
+block_rect = block.get_rect()
 orb = pygame.image.load("img/images/orb-yellow.png")
 orb = pygame.transform.smoothscale(orb, (32, 32))
+orb_rect = orb.get_rect()
 trick = pygame.image.load("img/images/obj-breakable.png")
 trick = pygame.transform.smoothscale(trick, (32, 32))
-
+trick_rect = trick.get_rect()
 #  ints
 fill = 0
 num = 0
@@ -157,14 +162,7 @@ pygame.mixer_music.play()
 tip = font.render("tip: tap and hold for the first few seconds of the level", True, BLUE)
 
 
-def player_controls(event1, event2):
-    event1 = pygame.MOUSEBUTTONDOWN
-    if keys[pygame.K_SPACE]:
-        print('jump')
-    event2 = keys
-    if keys[pygame.K_UP]:
-        print('jump')
-    return player_controls
+
 
 class Draw(pygame.sprite.Sprite):
     """parent class to all obstacle classes; Sprite class"""
@@ -181,34 +179,7 @@ def eval_outcome(won: bool, died: bool):
     # if died:
     #     death_screen()
     
-'''PLAYER/SELF'''
-class Player(pygame.sprite.Sprite):
-    """Class for player. Holds update method, win and die variables, collisions and more."""
-    win: bool
-    died: bool
 
-    def __init__(self, image, platforms, pos, *groups):
-        """
-        :param image: block face avatar
-        :param platforms: obstacles such as coins, blocks, spikes, and orbs
-        :param pos: starting position
-        :param groups: takes any number of sprite groups.
-        """
-        super().__init__(*groups)
-        self.onGround = False  # player on ground?
-        self.platforms = platforms  # obstacles but create a class variable for it
-        self.died = False  # player died?
-        self.win = False  # player beat level?
-
-        self.image = pygame.transform.smoothscale(image, (32, 32))
-        self.rect = self.image.get_rect(center=pos)  # get rect gets a Rect object from the image
-        self.jump_amount = 10  # jump strength
-        self.particles = []  # player trail
-        self.isjump = False  # is the player jumping?
-        self.vel = Vector2(0, 0)  # velocity starts at zero
-
- 
-    '''Player movement'''
 
 """WAITTTT"""
 class Platform(Draw):
@@ -252,7 +223,23 @@ class End(Draw):
     def __init__(self, image, pos, *groups):
         super().__init__(image, pos, *groups)
 
-
+'''PARTICLES'''
+class Particle:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.vel_x = random.uniform(-1,1)
+        self.vel_y = random.uniform(-1,1)
+        self.color = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
+        self.size = random.randint(2,5)
+    
+    def update(self):
+        self.x += self.vel_x
+        self.y += self.vel_y
+    
+    def draw(self, screen):
+        pygame.draw.circle(screen, self.color, (int(self.x)), (int(self.y)) self.size, None, None, None) # type: ignore
+        
 
 
 
@@ -301,11 +288,15 @@ while True:
         screen.blit(dificulty, (300,250))
         if keys[pygame.K_BACKSPACE]:
             game_active = False
-        tips = font.render('Please press SPACE to play.', False, WHITE)
+        tips = font.render('Please press P to play.', False, WHITE)
         screen.blit(tips, (500,200))
+        
+        
         '''Start of LEVEL Zodiac'''
-        if keys[pygame.K_SPACE]:
+        if keys[pygame.K_p]:
             level1_active = True
+            
+            
     if level1_active == True:
         pygame.mixer.music.load("img/music/Castle-town.mp3")
         pygame.mixer_music.play()
@@ -317,17 +308,17 @@ while True:
         ALL_LEVELS_GROUND = pygame.image.load('img/Level_ground.png').convert_alpha()
         level1_ground_rect = ALL_LEVELS_GROUND.get_rect(topleft = (0,450))
         screen.blit(ALL_LEVELS_GROUND, level1_ground_rect)
-        GRAVITY += 1
+        GRAVITY += 7
         player_rect.y += GRAVITY
         if player_rect.y >= 410:
             player_rect.y = 410
         screen.blit(player, player_rect)
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                GRAVITY = -20
-        if event.type == pygame.KEYUP:
-            print('space key up')
+        if keys[pygame.K_SPACE]:
+            GRAVITY -= 10
+        else: GRAVITY = 0
         ZODIAC = [screen3, zodiac_bg, ALL_LEVELS_GROUND, player, player_rect]
+
+        
          
         
 

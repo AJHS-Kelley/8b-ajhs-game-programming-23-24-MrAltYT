@@ -1,4 +1,4 @@
-# 8B Geometry Dash Sponsored by RobTop, Created by Johnson Traveon and Christain Ortiz v0.9
+# 8B Geometry Dash Sponsored by RobTop, Created by Johnson Traveon and Christain Ortiz v1
 
 # Kelley -- 04/25/24 -- Code Review 
 # Create 'HEADERS' for each section of your code, such as 'Controls' or 'Screen Information' to keep the data organized. 
@@ -98,7 +98,7 @@ cedit_rect = cEdit.get_rect(center = (225,290))
 demonface = pygame.image.load('img/sed.png')
 font = pygame.font.SysFont("lucidaconsole", 20)
 player = pygame.image.load('img/images/avatar.png')
-player_rect = player.get_rect(center = (200,300))
+player_rect = player.get_rect(bottomleft = (50,450))
 player_rect.x += 50
 
 
@@ -118,7 +118,8 @@ elements = pygame.sprite.Group()
 # images
 spike = pygame.image.load("img/images/obj-spike.png")
 spike = resize(spike)
-spike_rect = spike.get_rect()
+spike_rect = spike.get_rect(bottomleft = (300, 450))
+counter = 1
 coin = pygame.image.load("img/images/coin.png")
 coin = pygame.transform.smoothscale(coin, (32, 32))
 coin_rect = coin.get_rect()
@@ -162,7 +163,11 @@ pygame.mixer_music.play()
 tip = font.render("tip: tap and hold for the first few seconds of the level", True, BLUE)
 
 
-
+def generate_object_name():
+    global counter
+    spike_name = "spike" + str(counter)
+    counter += 1
+    return spike_name
 
 class Draw(pygame.sprite.Sprite):
     """parent class to all obstacle classes; Sprite class"""
@@ -238,10 +243,8 @@ class Particle:
         self.y += self.vel_y
     
     def draw(self, screen):
-        pygame.draw.circle(screen, self.color, (int(self.x)), (int(self.y)) self.size, None, None, None) # type: ignore
+        pygame.draw.circle(screen, self.color, (int(self.x)), (int(self.y)), self.size, None, None, None) # type: ignore
         
-
-
 
 
 while True:
@@ -308,15 +311,26 @@ while True:
         ALL_LEVELS_GROUND = pygame.image.load('img/Level_ground.png').convert_alpha()
         level1_ground_rect = ALL_LEVELS_GROUND.get_rect(topleft = (0,450))
         screen.blit(ALL_LEVELS_GROUND, level1_ground_rect)
-        GRAVITY += 7
+        GRAVITY += 3
         player_rect.y += GRAVITY
-        if player_rect.y >= 410:
+        if player_rect.y > 410:
             player_rect.y = 410
         screen.blit(player, player_rect)
-        if keys[pygame.K_SPACE]:
-            GRAVITY -= 10
+        if keys[pygame.K_SPACE] and player_rect.y == 410:
+            GRAVITY -= 80
+            
         else: GRAVITY = 0
         ZODIAC = [screen3, zodiac_bg, ALL_LEVELS_GROUND, player, player_rect]
+        spike_rect.x -= 4
+        if spike_rect.x < -100:
+            spike_rect.x = x
+        screen.blit(spike, spike_rect)
+        # if player_rect.colliderect(spike_rect):
+        #     print("death")
+        if counter == 2:
+            print(generate_object_name())
+            
+            
 
         
          

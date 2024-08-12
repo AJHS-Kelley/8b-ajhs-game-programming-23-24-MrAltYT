@@ -252,11 +252,6 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
-        if event.type == pygame.K_ESCAPE:
-            print(input('Are you sure you want to leave?'))
-            if event.type == pygame.K_KP_ENTER:
-                pygame.quit()
-                exit()
     keys = pygame.key.get_pressed()
     if game_active == False:    
         screen.blit(geometry_bg,(0,0))
@@ -329,6 +324,9 @@ while True:
         #     print("death")
         if counter == 2:
             print(generate_object_name())
+            if level1_active == True:
+                if keys[pygame.K_KP_ENTER]:
+                    print("Pause Menu")
             
             
 

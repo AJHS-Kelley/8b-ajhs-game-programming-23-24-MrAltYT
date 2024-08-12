@@ -324,9 +324,7 @@ while True:
         #     print("death")
         if counter == 2:
             print(generate_object_name())
-            if level1_active == True:
-                if keys[pygame.K_KP_ENTER]:
-                    print("Pause Menu")
+
             
             
 

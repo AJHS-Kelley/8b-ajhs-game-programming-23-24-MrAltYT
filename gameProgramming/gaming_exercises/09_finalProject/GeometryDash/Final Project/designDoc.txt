@@ -1,0 +1,23 @@
+Game Genre / Type: Geometry Dash
+Theme: Bright, Brillaint / Dark Graphics -- Tropical Setting
+
+Win Condition(s): Reach the end of the Level
+Loss Condition(s): Die before reaching the end or restart the level
+
+Levels / Screens:
+    -- Zodiac
+    -- Deadlocked
+
+Objectives /  Enemies / Obsticles: 
+ -- beat the level / monsters / spike / block
+ 
+ Items / Equipment / Objects
+    -- Stars, Orbs, Coins / N/A / 322,927 squares 
+
+Difficulty Change:
+    -- Extreme Demon
+    -- Hard Demon
+
+Controls:
+    -- Hold to go up
+    -- Tap/Click to jump

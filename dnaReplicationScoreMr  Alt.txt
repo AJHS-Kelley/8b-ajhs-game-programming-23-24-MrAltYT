@@ -1,0 +1,6 @@
+DNA Sequence: CC
+RNA Sequence: GG
+Transcription Time: 3.919970989227295
+Score: 50.0
+Mr  Alt
+2024-01-18 14:05:12.340501
